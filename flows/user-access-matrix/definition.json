@@ -1,0 +1,682 @@
+{
+  "name": "00000000-0000-4000-8000-000000005003",
+  "id": "/providers/Microsoft.Flow/flows/00000000-0000-4000-8000-000000005003",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Demo Escalation - User Access Matrix",
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_lists_for_access": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "listsForAccess",
+                "type": "array",
+                "value": [
+                  {
+                    "listTitle": "Demo Escalations"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference"
+                  }
+                ]
+              },
+              {
+                "name": "accessContractFailed",
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Initialize_approved_bindings": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "approvedOperatorRoleDefinitionId",
+                "type": "string",
+                "value": "1073741830"
+              },
+              {
+                "name": "approvedReaderRoleDefinitionId",
+                "type": "string",
+                "value": "1073741826"
+              },
+              {
+                "name": "approvedUsers",
+                "type": "array",
+                "value": [
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "edit",
+                      "view",
+                      "csvExport"
+                    ]
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "edit",
+                      "view",
+                      "csvExport"
+                    ]
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "edit",
+                      "view",
+                      "csvExport"
+                    ]
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "edit",
+                      "view",
+                      "csvExport"
+                    ]
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "edit",
+                      "view",
+                      "csvExport"
+                    ]
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "View",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "view",
+                      "csvExport"
+                    ]
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "View",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001",
+                    "capabilities": [
+                      "view",
+                      "csvExport"
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "roleAssignments",
+                "type": "array",
+                "value": [
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "Editor",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "View",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "View",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "View",
+                    "listTitle": "Demo Escalations",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  },
+                  {
+                    "email": "fixture.sender@example.invalid",
+                    "accessLevel": "View",
+                    "listTitle": "Demo Vendor Reference",
+                    "principalId": "FIXTURE-ID-001",
+                    "roleDefinitionId": "FIXTURE-ID-001"
+                  }
+                ]
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_lists_for_access": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Preflight_escalations_list": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://example.invalid/sites/DemoPortal",
+              "parameters/method": "GET",
+              "parameters/uri": "_api/web/lists/getbytitle('Demo Escalations')?$select=Id,Title,HasUniqueRoleAssignments",
+              "parameters/headers": {
+                "Accept": "application/json;odata=nometadata"
+              },
+              "parameters/body": {}
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "HttpRequest",
+              "connectionName": "fixture-connection"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Initialize_approved_bindings": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Preflight_vendor_reference_list": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://example.invalid/sites/DemoPortal",
+              "parameters/method": "GET",
+              "parameters/uri": "_api/web/lists/getbytitle('Demo Vendor Reference')?$select=Id,Title,HasUniqueRoleAssignments",
+              "parameters/headers": {
+                "Accept": "application/json;odata=nometadata"
+              },
+              "parameters/body": {}
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "HttpRequest",
+              "connectionName": "fixture-connection"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Preflight_escalations_list": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Validate_list_preflight": {
+          "type": "If",
+          "expression": "@and(not(empty(body('Preflight_escalations_list')?['Id'])), not(empty(body('Preflight_escalations_list')?['Title'])), equals(body('Preflight_escalations_list')?['HasUniqueRoleAssignments'], false), not(empty(body('Preflight_vendor_reference_list')?['Id'])), not(empty(body('Preflight_vendor_reference_list')?['Title'])), equals(body('Preflight_vendor_reference_list')?['HasUniqueRoleAssignments'], false))",
+          "actions": {},
+          "else": {
+            "actions": {
+              "Terminate_list_preflight_failed": {
+                "type": "Terminate",
+                "inputs": {
+                  "runStatus": "Failed"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Preflight_vendor_reference_list": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Validate_approved_binding_shapes": {
+          "type": "If",
+          "expression": "@and(equals(length(variables('approvedUsers')),7),not(contains(string(variables('approvedUsers')),'__PRINCIPAL_ID_')),not(contains(string(variables('approvedUsers')),'__APPROVED_OPERATOR_ROLE_DEFINITION_ID__')),not(contains(string(variables('approvedUsers')),'__APPROVED_READER_ROLE_DEFINITION_ID__')),not(equals(string(variables('approvedOperatorRoleDefinitionId')),'__APPROVED_OPERATOR_ROLE_DEFINITION_ID__')),not(equals(string(variables('approvedReaderRoleDefinitionId')),'__APPROVED_READER_ROLE_DEFINITION_ID__')))",
+          "actions": {},
+          "else": {
+            "actions": {
+              "Terminate_invalid_approved_binding": {
+                "type": "Terminate",
+                "inputs": {
+                  "runStatus": "Failed"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Validate_list_preflight": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Preflight_approved_principal": {
+          "type": "Foreach",
+          "foreach": "@variables('approvedUsers')",
+          "actions": {
+            "Get_approved_principal": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@concat('_api/web/getuserbyid(', item()?['principalId'], ')')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=nometadata",
+                    "Content-Type": "application/json;odata=nometadata"
+                  },
+                  "parameters/body": {}
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runAfter": {}
+            }
+          },
+          "runAfter": {
+            "Validate_approved_binding_shapes": [
+              "Succeeded"
+            ]
+          },
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 1
+            }
+          }
+        },
+        "Preflight_operator_role_definition": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://example.invalid/sites/DemoPortal",
+              "parameters/method": "GET",
+              "parameters/uri": "_api/web/roledefinitions/getbyid(1073741830)?$select=Id,Name",
+              "parameters/headers": {
+                "Accept": "application/json;odata=nometadata"
+              },
+              "parameters/body": {}
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "HttpRequest",
+              "connectionName": "fixture-connection"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Preflight_approved_principal": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Preflight_reader_role_definition": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://example.invalid/sites/DemoPortal",
+              "parameters/method": "GET",
+              "parameters/uri": "_api/web/roledefinitions/getbyid(1073741826)?$select=Id,Name",
+              "parameters/headers": {
+                "Accept": "application/json;odata=nometadata"
+              },
+              "parameters/body": {}
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "HttpRequest",
+              "connectionName": "fixture-connection"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Preflight_operator_role_definition": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Validate_approved_binding_responses": {
+          "type": "If",
+          "expression": "@and(equals(string(body('Preflight_operator_role_definition')?['Id']),string(variables('approvedOperatorRoleDefinitionId'))),equals(string(body('Preflight_reader_role_definition')?['Id']),string(variables('approvedReaderRoleDefinitionId'))))",
+          "actions": {},
+          "else": {
+            "actions": {
+              "Terminate_invalid_approved_binding_response": {
+                "type": "Terminate",
+                "inputs": {
+                  "runStatus": "Failed"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Preflight_reader_role_definition": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_access_changes": {
+          "type": "Scope",
+          "actions": {
+            "Apply_to_each_list_for_access": {
+              "type": "Foreach",
+              "foreach": "@variables('listsForAccess')",
+              "actions": {
+                "Break_role_inheritance": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://example.invalid/sites/DemoPortal",
+                      "parameters/method": "POST",
+                      "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/breakroleinheritance(copyRoleAssignments=false,clearSubscopes=true)')",
+                      "parameters/headers": {
+                        "Accept": "application/json;odata=verbose",
+                        "Content-Type": "application/json;odata=verbose"
+                      },
+                      "parameters/body": {}
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "operationId": "HttpRequest",
+                      "connectionName": "fixture-connection"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runAfter": {}
+                }
+              },
+              "runAfter": {}
+            },
+            "Apply_to_each_role_assignment": {
+              "type": "Foreach",
+              "foreach": "@variables('roleAssignments')",
+              "actions": {
+                "Add_role_assignment": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://example.invalid/sites/DemoPortal",
+                      "parameters/method": "POST",
+                      "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/roleassignments/addroleassignment(principalid=', item()?['principalId'], ',roledefid=', item()?['roleDefinitionId'], ')')",
+                      "parameters/headers": {
+                        "Accept": "application/json;odata=verbose",
+                        "Content-Type": "application/json;odata=verbose"
+                      },
+                      "parameters/body": {}
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "operationId": "HttpRequest",
+                      "connectionName": "fixture-connection"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runAfter": {}
+                }
+              },
+              "runAfter": {
+                "Apply_to_each_list_for_access": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Verify_role_assignments": {
+              "type": "Foreach",
+              "foreach": "@variables('roleAssignments')",
+              "actions": {
+                "Get_role_assignment_bindings": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://example.invalid/sites/DemoPortal",
+                      "parameters/method": "GET",
+                      "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/roleassignments/getbyprincipalid(', item()?['principalId'], ')/roledefinitionbindings')",
+                      "parameters/headers": {
+                        "Accept": "application/json;odata=nometadata"
+                      },
+                      "parameters/body": {}
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "operationId": "HttpRequest",
+                      "connectionName": "fixture-connection"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runAfter": {}
+                },
+                "Fail_if_expected_role_missing": {
+                  "type": "If",
+                  "expression": "@not(contains(string(body('Get_role_assignment_bindings')?['value']), string(item()?['roleDefinitionId'])))",
+                  "actions": {
+                    "Set_access_contract_failed": {
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "accessContractFailed",
+                        "value": true
+                      }
+                    }
+                  },
+                  "else": {
+                    "actions": {}
+                  },
+                  "runAfter": {
+                    "Get_role_assignment_bindings": [
+                      "Succeeded"
+                    ]
+                  }
+                }
+              },
+              "runtimeConfiguration": {
+                "concurrency": {
+                  "repetitions": 1
+                }
+              },
+              "runAfter": {
+                "Apply_to_each_role_assignment": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Validate_approved_binding_responses": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Validate_access_contract_result": {
+          "type": "If",
+          "expression": "@equals(variables('accessContractFailed'), true)",
+          "actions": {
+            "Terminate_access_contract_failed": {
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Failed"
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Apply_access_changes": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compensate_reset_inheritance": {
+          "type": "Foreach",
+          "foreach": "@variables('listsForAccess')",
+          "actions": {
+            "Reset_role_inheritance": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/resetroleinheritance')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose"
+                  },
+                  "parameters/body": {}
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runAfter": {}
+            }
+          },
+          "runAfter": {
+            "Apply_access_changes": [
+              "Failed",
+              "TimedOut"
+            ]
+          }
+        },
+        "Terminate_after_compensation": {
+          "type": "Terminate",
+          "inputs": {
+            "runStatus": "Failed"
+          },
+          "runAfter": {
+            "Apply_access_changes": [
+              "Failed",
+              "TimedOut"
+            ],
+            "Compensate_reset_inheritance": [
+              "Succeeded",
+              "Failed",
+              "TimedOut"
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+        "tier": "NotSpecified",
+        "apiName": "sharepointonline",
+        "isProcessSimpleApiReferenceAlreadyDone": false
+      }
+    },
+    "flowFailureAlertSubscribed": false,
+    "isManaged": false
+  }
+}

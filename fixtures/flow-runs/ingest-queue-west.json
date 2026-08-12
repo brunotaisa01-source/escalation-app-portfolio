@@ -1,0 +1,40 @@
+{
+  "flowSlug": "ingest-queue-west",
+  "mode": "local-mock",
+  "tenantCalls": 0,
+  "deterministicNow": "2026-01-15T12:00:00Z",
+  "triggerInput": {
+    "fixtureRunId": "RUN-INGEST_QUEUE_WEST-001",
+    "dryRun": true
+  },
+  "connectorResponses": {
+    "Within_UK_weekday_window/Get_emails_(V3)": {
+      "attempts": [{
+        "status": "Succeeded",
+        "outputs": {
+          "statusCode": 200,
+          "body": {
+            "value": [{
+              "from": "fixture.sender@example.invalid",
+              "subject": "Fixture west escalation",
+              "receivedDateTime": "2026-01-15T11:30:00Z",
+              "internetMessageId": "<fixture-ingest-west-0001@example.invalid>"
+            }]
+          }
+        }
+      }]
+    },
+    "Within_UK_weekday_window/Apply_to_each/List_rows_present_in_a_table": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }]
+    },
+    "Within_UK_weekday_window/Apply_to_each/Condition/Add_a_row_into_a_table": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 201, "body": { "rowId": "ROW-WEST-0001" } } }]
+    }
+  },
+  "expected": {
+    "status": "Succeeded",
+    "requiredActions": ["Within_UK_weekday_window", "Get_emails_(V3)", "Add_a_row_into_a_table"],
+    "externalGates": ["tenantImport", "tenantReadback", "authenticatedUat"]
+  },
+  "expectedStatus": "LOCAL_MOCK_GREEN"
+}

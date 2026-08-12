@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contractVersion": "1.0.0",
+  "templateStatus": "TEMPLATE_REBIND_REQUIRED",
+  "lists": [
+    {
+      "displayName": "Demo Escalations",
+      "internalName": "DEMOEscalations",
+      "keyField": "UniqueKey",
+      "fields": ["UniqueKey", "OriginalUniqueKey", "Mailbox", "SourceQueue", "From", "Reference", "ReceivedDateTime", "InternetMessageId", "OutlookMessageId", "ConversationId", "SMarker", "Vendor", "VendorName", "VendorCategory", "Entity", "DocDate", "InvRef", "Value", "ActionType", "Priority", "APOwner", "EscalationDate", "WorkingNotes", "DateResolved", "Status", "DaysToResolve", "IsClosed"]
+    },
+    {
+      "displayName": "Demo Vendor Reference",
+      "internalName": "DEMOEscalationVendorReference",
+      "keyField": "VendorLookupKey",
+      "fields": ["Vendor", "VendorName", "VendorCategory", "VendorLookupKey"]
+    }
+  ],
+  "choiceFields": {
+    "Status": ["Action Required", "In Progress", "Closed", "Duplicate"],
+    "Priority": ["Low", "Medium", "High", "Critical"]
+  },
+  "readOnlyEmailFields": ["UniqueKey", "OriginalUniqueKey", "Mailbox", "SourceQueue", "From", "Reference", "ReceivedDateTime", "InternetMessageId", "OutlookMessageId", "ConversationId", "SMarker"],
+  "operatorFields": ["Vendor", "VendorName", "VendorCategory", "Entity", "DocDate", "InvRef", "Value", "ActionType", "Priority", "APOwner", "EscalationDate", "WorkingNotes", "DateResolved", "Status"],
+  "derivedFields": ["DaysToResolve", "IsClosed"],
+  "provisionalTextFields": ["ActionType", "Entity", "APOwner"],
+  "rebinding": {
+    "siteUrl": "__DEMO_SITE_URL__",
+    "escalationsListTitle": "__ESCALATIONS_LIST_TITLE__",
+    "vendorReferenceListTitle": "__VENDOR_REFERENCE_LIST_TITLE__",
+    "sourceFilePath": "__ESCALATION_SOURCE_FILE_PATH__"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "mode": "sharepoint",
+  "templateStatus": "LIVE_READONLY_FRONTEND",
+  "siteContract": {
+    "siteName": "DEMO SharePoint",
+    "listTitle": "Demo Escalations",
+    "vendorReferenceListTitle": "Demo Vendor Reference"
+  },
+  "target": {
+    "kind": "relative-pack-assets",
+    "path": "frontend",
+    "launcherPath": "frontend/launcher/escalation-launcher.js",
+    "shellPath": "frontend/dist/index.html",
+    "bundlePath": "frontend/dist/assets/app.js",
+    "sourceOfTruth": "project docs and current filesystem evidence",
+    "publication": "not performed"
+  },
+  "views": ["Open", "Closed", "All"],
+  "pageSizes": [10, 20, 50],
+  "serverSide": ["query", "columnFilters", "paging", "nextLink", "counts", "oldestOpen", "explicitFullFilteredExport"],
+  "filters": {
+    "presentation": "inline-header-arrow",
+    "categorical": "multi-select-select-all-clear",
+    "text": ["contains", "equals"],
+    "date": ["on", "before", "after", "between"],
+    "numeric": ["equals", "lt", "lte", "gt", "gte", "between"],
+    "combination": "OR within a column; AND between columns"
+  },
+  "visibleTableColumns": ["EscalationId", "Status", "ReceivedDateTime", "Age", "SourceQueue", "Mailbox", "From", "Vendor", "VendorName", "VendorCategory", "Entity", "ReferenceOrSubject", "DocDate", "InvRef", "Value", "APOwner", "Priority", "ActionType", "EscalationDate", "WorkingNotes", "DateResolved", "DaysToResolve"],
+  "hiddenTechnicalFields": ["InternetMessageId", "OutlookMessageId", "ConversationId", "UniqueKey", "OriginalUniqueKey", "SMarker"],
+  "readOnlyEmailFields": ["UniqueKey", "OriginalUniqueKey", "Mailbox", "SourceQueue", "From", "Reference", "ReceivedDateTime", "InternetMessageId", "OutlookMessageId", "ConversationId", "SMarker"],
+  "automaticFields": ["Title", "Reference", "ReceivedDateTime", "Mailbox", "SourceQueue", "From", "UniqueKey", "InternetMessageId", "OutlookMessageId", "ConversationId", "SMarker"],
+  "operatorFields": ["Vendor", "VendorName", "VendorCategory", "Entity", "DocDate", "InvRef", "Value", "ActionType", "Priority", "APOwner", "EscalationDate", "WorkingNotes", "DateResolved", "Status"],
+  "requiredBeforeSave": ["ActionType", "Status", "Priority", "WorkingNotes", "DateResolved", "APOwner", "Entity"],
+  "duplicateStatus": {
+    "terminal": true,
+    "ordinaryRequiredFieldsBypassed": true,
+    "generatedWorkingNotesLine": "Duplicate",
+    "openStatuses": ["Action Required", "In Progress"],
+    "closedStatuses": ["Closed", "Duplicate"],
+    "unknownStatuses": "All-only with warning",
+    "reopenClears": ["DateResolved", "DaysToResolve", "IsClosed"]
+  },
+  "save": {
+    "mode": "explicit-single-save",
+    "existingItemOnly": true,
+    "method": "MERGE",
+    "guards": ["item ID", "current ETag", "pending lock", "412 conflict retention", "readback confirmation"],
+    "create": false,
+    "autosave": false
+  }
+}

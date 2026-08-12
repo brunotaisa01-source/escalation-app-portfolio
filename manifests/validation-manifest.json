@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "2.0.0",
+  "pack": "01-escalation-app",
+  "status": "REPAIR_LOCAL_GREEN_CANDIDATE_EXTERNAL_GATES_RED",
+  "publication": "NOT_PERFORMED",
+  "sanitization": {
+    "mode": "deterministic-fictional-fixtures",
+    "sourceReadOnly": true,
+    "baselineReadOnly": true,
+    "destinationOnlyWrite": true,
+    "strictPackScanner": "GREEN_0_FINDINGS",
+    "independentScanner": "GREEN_PYTHON_STDLIB_188_FILES_12_ZIPS_60_ENTRIES_0_FINDINGS",
+    "independentNegativeControl": "EXPECTED_RED_BLOCKED_SOURCE_LABEL_EXIT_1",
+    "officialMutationControls": "GREEN_6_NEGATIVE_CATEGORIES_DETECTED",
+    "sourceDerivedPrivateMarkerScan": "GREEN_HASHED_SOURCE_DERIVED_MARKERS_0_REPAIR_MATCHES",
+    "encodingAndControls": "GREEN_STRICT_UTF8_NO_C0_DEL_REPLACEMENT_OR_MOJIBAKE",
+    "emailsIdsPathsAndSecrets": "GREEN_RESERVED_EMAILS_PLACEHOLDER_GUIDS_NO_PRIVATE_PATH_OR_SECRET",
+    "dependencyAndRuntimeTrees": "GREEN_ABSENT_FROM_PACK",
+    "generatedAssets": "GREEN_DIST_GOLDEN_AND_ZIPS_SCANNED",
+    "renderedDom": "GREEN_EDGE_REAL_NO_PROHIBITED_DOM_TOKEN_OR_EXTERNAL_REQUEST"
+  },
+  "localGates": {
+    "frontendTests": "GREEN_149_PASS_0_FAIL",
+    "flowTests": "GREEN_32_PASS_0_FAIL_12_DEFINITIONS",
+    "securityRegressionTests": "GREEN_7_PASS_0_FAIL",
+    "localE2E": "GREEN_4_PASS_0_FAIL",
+    "definitionExecutor": "GREEN_12_OF_12_TRIGGER_ACTION_BRANCH_EXPRESSION_RUNAFTER_ERROR_RETRY_OUTPUT",
+    "definitionStateLink": "GREEN_12_EXECUTIONS_131_CONNECTOR_EFFECTS_7_CASES_3_VENDORS_4_ETL_ROWS",
+    "definitionMutation": "GREEN_SEED_MUTATION_CHANGED_EXPORTED_CSV",
+    "timezone": "GREEN_EUROPE_LONDON_GMT_BST_AND_MARCH_OCTOBER_TRANSITIONS",
+    "packageParity": "GREEN_12_OF_12_ZIPS_60_OF_60_INTERNAL_ENTRIES",
+    "packageDeterminism": "GREEN_CANONICAL_REGENERATION_BYTE_DETERMINISTIC",
+    "csvDeterminism": "GREEN_7_ROWS_SHA256_9CC9EB542919D45936B1D82AA53B87AFAA754F3AA4EB6106619D8AFBAD241693",
+    "build": "GREEN_WEBPACK_5_109_2_REBUILT_BYTES_MATCH_PACK",
+    "browserInteractiveSmoke": "GREEN_EDGE_151_2_LOOPBACK_REQUESTS_0_ERRORS_0_EXTERNAL_REQUESTS",
+    "typecheck": "GREEN_TYPESCRIPT_7_0_2_CHECKJS",
+    "lint": "GREEN_ESLINT_71_FILES_0_WARNINGS_0_ERRORS",
+    "sourceRepairCrosswalk": "GREEN_12_BIJECTIVE_SOURCE_ARCHIVES_DEEP_PATH_ALLOWLIST_ZERO_UNAUTHORIZED_DIFFS"
+  },
+  "externalGates": {
+    "tenantImport": "RED_EXTERNAL_GATE",
+    "tenantRebind": "RED_EXTERNAL_GATE",
+    "tenantReadback": "RED_EXTERNAL_GATE",
+    "authenticatedUat": "RED_EXTERNAL_GATE"
+  },
+  "evidence": {
+    "flowIndex": "flows/flow-index.json",
+    "flowManifest": "manifests/flow-validation-manifest.json",
+    "packageContract": "manifests/package-contract.json",
+    "sourceRepairCrosswalk": "manifests/source-repair-crosswalk.json",
+    "definitionExecutor": "tools/flow-definition-runner.mjs",
+    "stateAdapter": "runtime/fake-connector.mjs",
+    "e2eRunner": "tools/local-e2e.mjs",
+    "packageParity": "tools/flow-package-parity.mjs",
+    "sanitizationScanner": "tools/public-sanitization-scan.mjs",
+    "csvGolden": "tests/e2e/fixtures/local-export.golden.csv",
+    "fileList": "manifests/pack-file-list.json"
+  },
+  "commandEvidence": {
+    "freshInstall": "npm ci --ignore-scripts --no-audit --no-fund; 173 packages; scratch only",
+    "allCoreTests": "npm test; exit 0; 149 frontend + 32 flow + 7 security",
+    "e2eTests": "npm run test:e2e; exit 0; 4 passed",
+    "lint": "npm run lint; exit 0; 71 files",
+    "typecheck": "npm run typecheck; exit 0",
+    "build": "npm run build; exit 0; output hashes match delivered dist",
+    "localE2E": "npm run e2e; exit 0; tenantCalls 0; external output root only",
+    "browser": "Microsoft Edge 151 via local Playwright harness; all checks true",
+    "crosswalk": "source-repair crosswalk with read-only source; exit 0; all local gates true",
+    "strictScanner": "public scanner and independent stdlib scanner; exit 0 on pack",
+    "negativeScanner": "independent mutation fixture; expected exit 1"
+  },
+  "limitations": [
+    "LOCAL_EXECUTION_DOES_NOT_PROVE_TENANT_IMPORT_OR_RUNTIME",
+    "BROWSER_EXPORT_USES_WALL_CLOCK_UNLESS_A_CLOCK_IS_INJECTED",
+    "EXTERNAL_GATES_REQUIRE_SEPARATE_AUTHORIZATION_AND_EVIDENCE",
+    "A_FRESH_INDEPENDENT_READ_ONLY_RELEASE_REVIEW_REMAINS_REQUIRED"
+  ]
+}

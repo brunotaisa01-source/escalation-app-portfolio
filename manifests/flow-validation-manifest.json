@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "1.0.0",
+  "pack": "01-escalation-app",
+  "sanitization": "deterministic-fixtures",
+  "flowCount": 12,
+  "evidenceScope": "LOCAL_READABLE_ZIP_PARITY_DEFINITION_EXECUTION_AND_SHARED_STATE_EFFECTS;_TENANT_RUNTIME_UNPROVEN",
+  "flows": [
+    {
+      "slug": "bootstrap-lists",
+      "category": "bootstrap/configuration",
+      "package": "packages/bootstrap-lists.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005001",
+      "definition": "flows/bootstrap-lists/definition.json",
+      "packageManifest": "flows/bootstrap-lists/package-manifest.json",
+      "flowManifest": "flows/bootstrap-lists/flow-manifest.json",
+      "apisMap": "flows/bootstrap-lists/apis-map.json",
+      "connectionsMap": "flows/bootstrap-lists/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "add-columns-and-views",
+      "category": "bootstrap/configuration",
+      "package": "packages/add-columns-and-views.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005002",
+      "definition": "flows/add-columns-and-views/definition.json",
+      "packageManifest": "flows/add-columns-and-views/package-manifest.json",
+      "flowManifest": "flows/add-columns-and-views/flow-manifest.json",
+      "apisMap": "flows/add-columns-and-views/apis-map.json",
+      "connectionsMap": "flows/add-columns-and-views/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "user-access-matrix",
+      "category": "bootstrap/configuration",
+      "package": "packages/user-access-matrix.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005003",
+      "definition": "flows/user-access-matrix/definition.json",
+      "packageManifest": "flows/user-access-matrix/package-manifest.json",
+      "flowManifest": "flows/user-access-matrix/flow-manifest.json",
+      "apisMap": "flows/user-access-matrix/apis-map.json",
+      "connectionsMap": "flows/user-access-matrix/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-cases-01",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-cases-01.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005004",
+      "definition": "flows/seed-cases-01/definition.json",
+      "packageManifest": "flows/seed-cases-01/package-manifest.json",
+      "flowManifest": "flows/seed-cases-01/flow-manifest.json",
+      "apisMap": "flows/seed-cases-01/apis-map.json",
+      "connectionsMap": "flows/seed-cases-01/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-cases-02",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-cases-02.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005005",
+      "definition": "flows/seed-cases-02/definition.json",
+      "packageManifest": "flows/seed-cases-02/package-manifest.json",
+      "flowManifest": "flows/seed-cases-02/flow-manifest.json",
+      "apisMap": "flows/seed-cases-02/apis-map.json",
+      "connectionsMap": "flows/seed-cases-02/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-vendors-01",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-vendors-01.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005006",
+      "definition": "flows/seed-vendors-01/definition.json",
+      "packageManifest": "flows/seed-vendors-01/package-manifest.json",
+      "flowManifest": "flows/seed-vendors-01/flow-manifest.json",
+      "apisMap": "flows/seed-vendors-01/apis-map.json",
+      "connectionsMap": "flows/seed-vendors-01/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-vendors-02",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-vendors-02.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005007",
+      "definition": "flows/seed-vendors-02/definition.json",
+      "packageManifest": "flows/seed-vendors-02/package-manifest.json",
+      "flowManifest": "flows/seed-vendors-02/flow-manifest.json",
+      "apisMap": "flows/seed-vendors-02/apis-map.json",
+      "connectionsMap": "flows/seed-vendors-02/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "manual-move-trigger-test",
+      "category": "test/trigger",
+      "package": "packages/manual-move-trigger-test.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005008",
+      "definition": "flows/manual-move-trigger-test/definition.json",
+      "packageManifest": "flows/manual-move-trigger-test/package-manifest.json",
+      "flowManifest": "flows/manual-move-trigger-test/flow-manifest.json",
+      "apisMap": "flows/manual-move-trigger-test/apis-map.json",
+      "connectionsMap": "flows/manual-move-trigger-test/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-west",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-west.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005009",
+      "definition": "flows/ingest-queue-west/definition.json",
+      "packageManifest": "flows/ingest-queue-west/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-west/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-west/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-west/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-north",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-north.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005010",
+      "definition": "flows/ingest-queue-north/definition.json",
+      "packageManifest": "flows/ingest-queue-north/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-north/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-north/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-north/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-east",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-east.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005011",
+      "definition": "flows/ingest-queue-east/definition.json",
+      "packageManifest": "flows/ingest-queue-east/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-east/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-east/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-east/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-south",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-south.zip",
+      "sourceEntryCount": 5,
+      "flowId": "00000000-0000-4000-8000-000000005012",
+      "definition": "flows/ingest-queue-south/definition.json",
+      "packageManifest": "flows/ingest-queue-south/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-south/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-south/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-south/connections-map.json",
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    }
+  ],
+  "externalGates": {
+    "tenantImport": "RED_EXTERNAL_GATE",
+    "tenantRebind": "RED_EXTERNAL_GATE",
+    "tenantReadback": "RED_EXTERNAL_GATE",
+    "authenticatedUat": "RED_EXTERNAL_GATE"
+  },
+  "prohibitedArtifactsExcluded": [
+    "mailbox ZIP source payloads",
+    "operational workbook",
+    "runtime SQLite",
+    "screenshots",
+    "historical archives",
+    "build caches",
+    "tenant evidence"
+  ]
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Duplicate status browser smoke</title>
+  </head>
+  <body>
+    <main id="main-content"><div id="app-root">Loading browser smoke...</div></main>
+    <pre id="browser-smoke-result" data-status="running">RUNNING</pre>
+    <script type="module">
+      import { createCaseService } from '../../../frontend/src/services/case-service.js';
+      import { renderApp } from '../../../frontend/src/ui/app.js';
+
+      const result = document.querySelector('#browser-smoke-result');
+      const waitFor = async (predicate, message, timeoutMs = 5000) => {
+        const started = performance.now();
+        while (!predicate()) {
+          if (performance.now() - started > timeoutMs) throw new Error(message);
+          await new Promise((resolve) => setTimeout(resolve, 20));
+        }
+      };
+      const check = (condition, message) => {
+        if (!condition) throw new Error(message);
+      };
+
+      try {
+        const baseService = createCaseService([{
+          id: 7,
+          Title: 'Synthetic Duplicate smoke',
+          Status: 'Action Required',
+          ReceivedDateTime: '2026-07-20T09:00:00Z',
+          WorkingNotes: 'Investigated',
+        }]);
+        const writes = [];
+        const service = {
+          ...baseService,
+          update(id, patch, etag) {
+            writes.push({ id, patch: structuredClone(patch), etag });
+            return baseService.update(id, patch, etag);
+          },
+        };
+        const governedValues = {
+          Status: ['Action Required', 'In Progress', 'Closed', 'Duplicate'],
+          Priority: ['Critical', 'High', 'Medium', 'Low'],
+          ActionType: ['Investigate'],
+          APOwner: ['Synthetic Owner'],
+          Entity: ['TEST'],
+        };
+        const confirmations = [];
+        const confirmationAnswers = [];
+        globalThis.confirm = (message) => {
+          confirmations.push(message);
+          return confirmationAnswers.shift() ?? false;
+        };
+
+        renderApp(document.querySelector('#app-root'), {
+          config: { mode: 'mock', pageSize: 10, governedValues, filterOptions: governedValues },
+          service,
+        });
+
+        await waitFor(() => document.querySelector('.case-table-row'), 'case row did not render');
+        document.querySelector('.case-table-row').click();
+        await waitFor(() => document.querySelector('#field-Status'), 'editor did not hydrate');
+
+        let status = document.querySelector('#field-Status');
+        confirmationAnswers.push(false);
+        status.value = 'Duplicate';
+        status.dispatchEvent(new Event('change', { bubbles: true }));
+        check(status.value === 'Action Required', 'cancel did not restore the saved status');
+        check(writes.length === 0, 'cancel issued a write');
+
+        confirmationAnswers.push(true);
+        status.value = 'Duplicate';
+        status.dispatchEvent(new Event('change', { bubbles: true }));
+        check(document.querySelector('#field-WorkingNotes').value === 'Investigated\nDuplicate', 'Duplicate note was not staged once');
+        check(document.querySelector('#save-state').textContent.includes('Duplicate staged'), 'staging message is missing');
+        check(document.querySelector('#save-case').disabled === false, 'explicit Save was not enabled');
+        check(writes.length === 0, 'staging issued a write');
+
+        status.value = 'In Progress';
+        status.dispatchEvent(new Event('change', { bubbles: true }));
+        check(document.querySelector('#field-WorkingNotes').value === 'Investigated', 'leaving Duplicate did not remove only the generated unsaved note');
+        check(writes.length === 0, 'changing away before Save issued a write');
+
+        confirmationAnswers.push(true);
+        status.value = 'Duplicate';
+        status.dispatchEvent(new Event('change', { bubbles: true }));
+        document.querySelector('#save-case').click();
+        await waitFor(() => writes.length === 1 && baseService.snapshot()[0].Status === 'Duplicate', 'explicit Save did not complete once');
+
+        check(confirmations.length === 3, 'unexpected confirmation count');
+        check(writes[0].patch.Status === 'Duplicate', 'Save patch omitted Duplicate');
+        check(writes[0].patch.WorkingNotes === 'Investigated\nDuplicate', 'Save patch omitted the generated Duplicate note');
+        check(writes[0].patch.IsClosed === true, 'Save patch omitted terminal IsClosed');
+        result.dataset.status = 'pass';
+        result.textContent = JSON.stringify({
+          status: 'PASS',
+          confirmations: confirmations.length,
+          writes: writes.length,
+          finalStatus: baseService.snapshot()[0].Status,
+          explicitSaveOnly: true,
+        });
+      } catch (error) {
+        result.dataset.status = 'fail';
+        result.textContent = `FAIL: ${error.message}`;
+      }
+    </script>
+  </body>
+</html>

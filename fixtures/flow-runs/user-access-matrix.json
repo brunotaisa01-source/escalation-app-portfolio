@@ -1,0 +1,34 @@
+{
+  "flowSlug": "user-access-matrix",
+  "mode": "local-mock",
+  "tenantCalls": 0,
+  "deterministicNow": "2026-01-15T12:00:00Z",
+  "triggerInput": { "fixtureRunId": "RUN-USER_ACCESS_MATRIX-001", "dryRun": true },
+  "connectorResponses": {
+    "Preflight_approved_principal/Get_approved_principal": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Apply_access_changes/Apply_to_each_list_for_access/Break_role_inheritance": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Apply_access_changes/Apply_to_each_role_assignment/Add_role_assignment": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Compensate_reset_inheritance/Reset_role_inheritance": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Preflight_escalations_list": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "Id": "LIST-ESCALATIONS", "Title": "Demo Escalations", "HasUniqueRoleAssignments": false } } }]
+    },
+    "Preflight_vendor_reference_list": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "Id": "LIST-VENDORS", "Title": "Demo Vendor Reference", "HasUniqueRoleAssignments": false } } }]
+    },
+    "Preflight_operator_role_definition": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "Id": 1073741830 } } }]
+    },
+    "Preflight_reader_role_definition": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "Id": 1073741826 } } }]
+    },
+    "Apply_access_changes/Verify_role_assignments/Get_role_assignment_bindings": {
+      "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [{ "RoleDefinitionBindings": [{ "Id": "FIXTURE-ID-001" }] }] } } }]
+    }
+  },
+  "expected": {
+    "status": "Succeeded",
+    "requiredActions": ["Validate_list_preflight", "Apply_access_changes", "Validate_access_contract_result"],
+    "externalGates": ["tenantImport", "tenantReadback", "authenticatedUat"]
+  },
+  "expectedStatus": "LOCAL_MOCK_GREEN"
+}

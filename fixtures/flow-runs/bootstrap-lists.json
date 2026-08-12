@@ -1,0 +1,24 @@
+{
+  "flowSlug": "bootstrap-lists",
+  "mode": "local-mock",
+  "tenantCalls": 0,
+  "deterministicNow": "2026-01-15T12:00:00Z",
+  "triggerInput": {
+    "fixtureRunId": "RUN-BOOTSTRAP_LISTS-001",
+    "dryRun": true
+  },
+  "connectorResponses": {
+    "Apply_to_each_list_definition/Create_list": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Apply_to_each_field_definition/Create_field": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] }
+  },
+  "expected": {
+    "status": "Succeeded",
+    "requiredActions": ["Initialize_list_definitions", "Create_list", "Create_field"],
+    "externalGates": [
+      "tenantImport",
+      "tenantReadback",
+      "authenticatedUat"
+    ]
+  },
+  "expectedStatus": "LOCAL_MOCK_GREEN"
+}

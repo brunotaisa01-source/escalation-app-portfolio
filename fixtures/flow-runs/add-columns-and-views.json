@@ -1,0 +1,25 @@
+{
+  "flowSlug": "add-columns-and-views",
+  "mode": "local-mock",
+  "tenantCalls": 0,
+  "deterministicNow": "2026-01-15T12:00:00Z",
+  "triggerInput": {
+    "fixtureRunId": "RUN-ADD_COLUMNS_AND_VIEWS-001",
+    "dryRun": true
+  },
+  "connectorResponses": {
+    "Apply_to_each_view_definition/Create_view": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Apply_to_each_view_field/Add_view_field": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Apply_to_each_index_definition/Enable_index": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] }
+  },
+  "expected": {
+    "status": "Succeeded",
+    "requiredActions": ["Create_view", "Add_view_field", "Enable_index"],
+    "externalGates": [
+      "tenantImport",
+      "tenantReadback",
+      "authenticatedUat"
+    ]
+  },
+  "expectedStatus": "LOCAL_MOCK_GREEN"
+}

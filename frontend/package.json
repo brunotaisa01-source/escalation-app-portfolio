@@ -1,0 +1,29 @@
+{
+  "name": "demo-escalation-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npm run test:frontend && npm run test:flows && npm run test:security",
+    "test:frontend": "node --test ../tests/frontend/*.test.js ../tests/frontend/*.test.mjs",
+    "test:flows": "node --test ../tests/flows/flow-contract.test.mjs ../tests/flows/flow-definition-runner.test.mjs ../tests/flows/package-contract.test.mjs ../tests/flows/package-parity.test.mjs ../tests/flows/source-repair-crosswalk.test.mjs",
+    "test:security": "node --test ../tests/security/public-sanitization.test.mjs",
+    "test:e2e": "node --test ../tests/e2e/local-e2e.test.mjs",
+    "test:all": "npm test && npm run test:e2e",
+    "e2e": "node ../tools/local-e2e.mjs",
+    "build": "webpack --config webpack.config.cjs --mode production",
+    "lint": "node ../tools/run-lint.mjs",
+    "typecheck": "tsc --project jsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.2.0",
+    "acorn": "^8.15.0",
+    "eslint": "^10.8.1",
+    "fflate": "^0.8.2",
+    "globals": "^17.9.0",
+    "typescript": "^7.0.2",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
+  }
+}

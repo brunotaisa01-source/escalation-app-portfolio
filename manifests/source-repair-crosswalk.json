@@ -1,0 +1,494 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceScope": "READ_ONLY_LOCAL_SOURCE_TO_REPAIR_STATIC_AND_LOCAL_BEHAVIOURAL_CROSSWALK",
+  "sourceLocatorSha256": "9ff1654ac42e39858b563dc3076d181a8876886bcf4f0de47233b29326893ba6",
+  "sourcePathEmitted": false,
+  "repairPack": "01-escalation-app",
+  "frontend": {
+    "sourceCount": 44,
+    "repairCount": 47,
+    "commonCount": 44,
+    "identicalCount": 33,
+    "changed": [
+      {
+        "path": "dist/assets/app.js",
+        "classification": "AUTHORIZED_GENERATED_BUILD_FROM_REPAIR_SOURCE"
+      },
+      {
+        "path": "dist/index.html",
+        "classification": "AUTHORIZED_GENERATED_BUILD_FROM_REPAIR_SOURCE"
+      },
+      {
+        "path": "launcher/escalation-launcher.js",
+        "classification": "AUTHORIZED_SANITIZATION_AND_TYPE_ANNOTATION"
+      },
+      {
+        "path": "package.json",
+        "classification": "AUTHORIZED_REPAIR_TOOLING"
+      },
+      {
+        "path": "public/index.html",
+        "classification": "AUTHORIZED_BRANDING_GENERALIZATION"
+      },
+      {
+        "path": "src/config/runtime-config.example.js",
+        "classification": "AUTHORIZED_BINDING_GENERALIZATION"
+      },
+      {
+        "path": "src/services/csv-export.js",
+        "classification": "AUTHORIZED_DETERMINISTIC_CLOCK_REPAIR"
+      },
+      {
+        "path": "src/services/query-total-coordinator.js",
+        "classification": "PRESERVED_BEHAVIOUR_LINT_CLEANUP"
+      },
+      {
+        "path": "src/services/sharepoint-transport.js",
+        "classification": "PRESERVED_BEHAVIOUR_LINT_CLEANUP"
+      },
+      {
+        "path": "src/ui/kpi-load-coordinator.js",
+        "classification": "AUTHORIZED_PRIVATE_LABEL_GENERALIZATION"
+      },
+      {
+        "path": "src/ui/workbench-view.js",
+        "classification": "AUTHORIZED_PRIVATE_LABEL_GENERALIZATION"
+      }
+    ],
+    "sourceOnlyCount": 0,
+    "repairOnly": [
+      {
+        "path": "jsconfig.json",
+        "classification": "AUTHORIZED_REPAIR_TOOLING"
+      },
+      {
+        "path": "launcher/globals.d.ts",
+        "classification": "AUTHORIZED_REPAIR_TOOLING"
+      },
+      {
+        "path": "package-lock.json",
+        "classification": "AUTHORIZED_REPAIR_TOOLING"
+      }
+    ],
+    "entrypoints": [
+      {
+        "path": "public/index.html",
+        "sourcePresent": true,
+        "repairPresent": true,
+        "classification": "AUTHORIZED_BRANDING_GENERALIZATION"
+      },
+      {
+        "path": "src/index.js",
+        "sourcePresent": true,
+        "repairPresent": true,
+        "classification": "PRESERVED_BYTE_EXACT"
+      },
+      {
+        "path": "launcher/escalation-launcher.js",
+        "sourcePresent": true,
+        "repairPresent": true,
+        "classification": "AUTHORIZED_SANITIZATION_AND_TYPE_ANNOTATION"
+      }
+    ],
+    "preservedEntrypoints": true,
+    "queryContract": "PRESERVED_BYTE_EXACT"
+  },
+  "flowSource": {
+    "inspectedArchives": 44,
+    "mappedArchiveShaCount": 12,
+    "mappingMode": "EXPLICIT_SOURCE_ARCHIVE_SHA256_TO_REPAIR_SLUG_BIJECTION",
+    "flows": [
+      {
+        "slug": "bootstrap-lists",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "991646d7b24cf0f6f22e63947bfb903d42f2ed5573de01878850d5714cb14bdf",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "01401344688cf0f78af547d53c80ae6d91b58373bc00b4d2f2c065181abdb645",
+        "repairDocumentSha256": "dbde2dca5a6b27c2c3c726a00bb00c55ce11cb1afd1a0bc4e59a65f020764444",
+        "authorizedDifferenceCounts": {
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 3,
+          "private-site-binding": 2,
+          "synthetic-binding-or-label": 35,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 6,
+        "branchCount": 2,
+        "expressionCount": 8,
+        "runAfterCount": 3
+      },
+      {
+        "slug": "add-columns-and-views",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "8672c115e5622d90a9435dd89df355bcfcb2d90fa0397c997a82659863bf7a97",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 2,
+        "sourceDocumentSha256": "fb0f4410525a708a709972bc164c307acae1f641dd2e3a9723dba99bdc30bf53",
+        "repairDocumentSha256": "19280f3391c03ea84e5073d89edfaf32b2226c34a27b595b415fd85981d25177",
+        "authorizedDifferenceCounts": {
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 4,
+          "private-site-binding": 3,
+          "synthetic-binding-or-label": 27,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 9,
+        "branchCount": 3,
+        "expressionCount": 10,
+        "runAfterCount": 5
+      },
+      {
+        "slug": "user-access-matrix",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "2c82a283477df64ae11daf505e7b43c31d3e4797a7df07508ee8bf73ee3a01f0",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 2,
+        "sourceDocumentSha256": "45977625cd487c79e7d942d46bb6c57600da73eb75076e960520d842a75a5214",
+        "repairDocumentSha256": "2d4632b8112252dea5e76af72391aa23bbae7852dbd77e124074ca81ec0424a0",
+        "authorizedDifferenceCounts": {
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 10,
+          "private-connector-parameter": 2,
+          "private-site-binding": 9,
+          "synthetic-binding-or-label": 79,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 28,
+        "branchCount": 11,
+        "expressionCount": 24,
+        "runAfterCount": 17
+      },
+      {
+        "slug": "seed-cases-01",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "7f6eb0d817369ff2a1244c9043f327c06faafb31ae8928bfb5f22d265503acc4",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "a0cd0cb15f364f3954113d266d76ab5075336e9fea67d867ffb51d1619914b7c",
+        "repairDocumentSha256": "559807aa98bb392a23aacda7c1189eea989279351b2627d8911fdd6c71c09eaf",
+        "authorizedDifferenceCounts": {
+          "deterministic-private-metadata": 1,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 3,
+          "private-connector-parameter": 1,
+          "private-site-binding": 2,
+          "synthetic-list-title-expression": 1,
+          "synthetic-seed-metadata": 2,
+          "synthetic-seed-replacement": 971
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 7,
+        "branchCount": 2,
+        "expressionCount": 36,
+        "runAfterCount": 4
+      },
+      {
+        "slug": "seed-cases-02",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "0bd880868c267aacdf548ddca91032377bcea30c10ec9942ebb2eaed6896fbe1",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "b7a14de4afe2b5f7243556f9e5a5e919f0f5300b236ecc08e1302a3a2ad52f3b",
+        "repairDocumentSha256": "5646bf52d0e08930b6625b3d267455a0eb535fe12672252fa2bb0015bce3ae9c",
+        "authorizedDifferenceCounts": {
+          "deterministic-private-metadata": 1,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 3,
+          "private-connector-parameter": 1,
+          "private-site-binding": 2,
+          "synthetic-list-title-expression": 1,
+          "synthetic-seed-metadata": 2,
+          "synthetic-seed-replacement": 854
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 7,
+        "branchCount": 2,
+        "expressionCount": 36,
+        "runAfterCount": 4
+      },
+      {
+        "slug": "seed-vendors-01",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "871db0d3b2bdc76f02159f6e8f6efab130e3e897e704dd66b94a2d3802423678",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "5a79edfd0ed72b77451548705b23372e8a4b0df6d86e418fa13f1f8e379c69ac",
+        "repairDocumentSha256": "935c674aa1289510898dc6298bd35d92b8ab0e95db666b607ad2206ff653aae7",
+        "authorizedDifferenceCounts": {
+          "deterministic-private-metadata": 1,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 3,
+          "private-connector-parameter": 1,
+          "private-site-binding": 2,
+          "synthetic-list-title-expression": 1,
+          "synthetic-seed-metadata": 2,
+          "synthetic-seed-replacement": 4013
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 7,
+        "branchCount": 2,
+        "expressionCount": 13,
+        "runAfterCount": 4
+      },
+      {
+        "slug": "seed-vendors-02",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "ec3b20314b721856cbfffd45136511a76f8024ca7a56fdac46f30c5dc05bff74",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "5d36288eaa643417f518edd005b9cba033e8719bdd1bcfca5cf6423206103c1a",
+        "repairDocumentSha256": "c118e708cf675baf653dc161d0812b79c100eccc8bab4709f853eb0fc5e2fa03",
+        "authorizedDifferenceCounts": {
+          "deterministic-private-metadata": 1,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 3,
+          "private-connector-parameter": 1,
+          "private-site-binding": 2,
+          "synthetic-list-title-expression": 1,
+          "synthetic-seed-metadata": 2,
+          "synthetic-seed-replacement": 4223
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 7,
+        "branchCount": 2,
+        "expressionCount": 13,
+        "runAfterCount": 4
+      },
+      {
+        "slug": "manual-move-trigger-test",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "563291bb1f1959104bf085b11a3dbe7b56420a889fa96e56ad2168b9b2b063df",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 2,
+        "sourceDocumentSha256": "a8a277d081a63de6c74495989730867c0cc8721ca362d9bce728258c602262cd",
+        "repairDocumentSha256": "4205c0e14db7503ae5a28c7631d4b31607f47ca79e309f34177bed5b879b7144",
+        "authorizedDifferenceCounts": {
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 2,
+          "private-connector-parameter": 2,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 2,
+        "branchCount": 0,
+        "expressionCount": 0,
+        "runAfterCount": 1
+      },
+      {
+        "slug": "ingest-queue-west",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "9b8d844064f1deb353f69175c35c8e9dc2d122e474e63b97027fd438167aa4e4",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "1b97093b4a1f8ff4071bf8e75158908d7aa50960c78d97082eed487ecfee0afa",
+        "repairDocumentSha256": "6d6ee1e10f250ca112562c98bea98178d624a77184ccdd01dfa0cc783b9783a9",
+        "authorizedDifferenceCounts": {
+          "deterministic-metadata-date": 2,
+          "deterministic-private-metadata": 31,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 5,
+          "private-connector-parameter": 11,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 11,
+        "branchCount": 4,
+        "expressionCount": 15,
+        "runAfterCount": 6
+      },
+      {
+        "slug": "ingest-queue-north",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "e79450ec0c9722f097fe6010735144fe3305ee580ed98310d3f3523bb1d3d90d",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "f777ce80db763a9368079cb03ef9f9cb1c518a25167ee98e6906bfc8a4700f66",
+        "repairDocumentSha256": "90977185a54122950efe1472c69533f5cb8cdd0ab692c4755725633210b5c0e6",
+        "authorizedDifferenceCounts": {
+          "deterministic-metadata-date": 2,
+          "deterministic-private-metadata": 29,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 5,
+          "private-connector-parameter": 9,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 11,
+        "branchCount": 4,
+        "expressionCount": 15,
+        "runAfterCount": 6
+      },
+      {
+        "slug": "ingest-queue-east",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "52295c3b6807ffb6ca7fe3fe67f5d38503fcce6fc60e6d939be2a44e42da6ba3",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "9bc5d17f3bf13dd9b8a54205be1816a029bfc0034b6bde18ae7d58ce1e4cb631",
+        "repairDocumentSha256": "339e0feb22cda2a0ff8b77f1204fc79376dbd31cf0371789bfb484281e389ea1",
+        "authorizedDifferenceCounts": {
+          "deterministic-metadata-date": 2,
+          "deterministic-private-metadata": 29,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 5,
+          "private-connector-parameter": 9,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 11,
+        "branchCount": 4,
+        "expressionCount": 15,
+        "runAfterCount": 6
+      },
+      {
+        "slug": "ingest-queue-south",
+        "classification": "PRESERVED_DEEP_CONTRACT_WITH_AUTHORIZED_SANITIZATION",
+        "sourceArchiveSha256": "2e570c6edc80b07be017c88dd71c50d972e6f54c9af961d01060ef179d7d3ab0",
+        "sourceMatchCount": 1,
+        "sourceArchiveCopiesFound": 1,
+        "sourceDocumentSha256": "ea24b70210fab18777cd112d9f6c459f8a6a368c58290201eabeb4040d55b7ad",
+        "repairDocumentSha256": "c37b428b92bc91558a9f9e4c3cb07bca59a93c58a613dc9aee9daabf81808368",
+        "authorizedDifferenceCounts": {
+          "deterministic-metadata-date": 2,
+          "deterministic-private-metadata": 29,
+          "placeholder-flow-id": 2,
+          "private-connection-binding": 5,
+          "private-connector-parameter": 9,
+          "synthetic-display-label": 1
+        },
+        "unauthorizedDifferences": [],
+        "sourceMapKeysExact": true,
+        "repairMapFindings": [],
+        "packageManifestShapePreserved": true,
+        "flowManifestContractPreserved": true,
+        "readableZipParity": true,
+        "triggerCount": 1,
+        "actionCount": 11,
+        "branchCount": 4,
+        "expressionCount": 15,
+        "runAfterCount": 6
+      }
+    ],
+    "authorizedDifferences": [
+      "FLOW_AND_RESOURCE_IDS_GENERALIZED",
+      "CONNECTION_BINDINGS_AND_TENANT_URLS_GENERALIZED",
+      "MAILBOX_IDENTITIES_AND_EMBEDDED_OPERATIONAL_ROWS_REPLACED_WITH_FIXTURES",
+      "ZIP_BYTES_REGENERATED_FROM_REPAIR_CANONICAL_JSON",
+      "INDEPENDENT_EXECUTOR_AND_MUTATION_TESTS_ADDED"
+    ]
+  },
+  "backendAndEtl": {
+    "classification": "AUTHORIZED_LOCAL_ADAPTER_GENERALIZATION_WITH_PRESERVED_SCHEMA_QUERY_AND_OUTPUT_CONTRACTS",
+    "localAdapter": "runtime/fake-connector.mjs",
+    "proof": [
+      "tests/e2e/local-e2e.test.mjs",
+      "tests/frontend/service-behavior.test.js",
+      "tests/flows/flow-definition-runner.test.mjs"
+    ],
+    "tenantRuntime": "RED_EXTERNAL_GATE"
+  },
+  "tests": {
+    "sourceCount": 64,
+    "repairCount": 29,
+    "commonCount": 21,
+    "identicalCount": 4,
+    "changedCommonCount": 17,
+    "sourceOnlyCount": 43,
+    "repairOnlyCount": 8,
+    "classification": "SELECTED_PUBLIC_TEST_CONTRACTS_PRESERVED_OR_SANITIZED;_OPERATIONAL_SOURCE_ONLY_TESTS_EXCLUDED;_REPAIR_REGRESSIONS_ADDED"
+  },
+  "privacy": {
+    "sourceDerivedMarkerCount": 31,
+    "leakCount": 0,
+    "leaks": [],
+    "markerValuesEmitted": false
+  },
+  "gates": {
+    "sourceReadOnly": true,
+    "sourcePathNotEmitted": true,
+    "frontendNoSourceOnlyFiles": true,
+    "frontendChangesClassified": true,
+    "frontendEntrypointsIndividuallyPreserved": true,
+    "allTwelveSourceArchivesMappedBijectively": true,
+    "allTwelveDeepContractsPreserved": true,
+    "allTwelveReadableZipPackagesCanonical": true,
+    "sourcePrivateMarkersAbsentFromRepair": true,
+    "externalTenantRuntimeStillUnproven": true
+  },
+  "allLocalCrosswalkGatesGreen": true,
+  "limitations": [
+    "STATIC_GRAPH_MATCH_AND_LOCAL_FIXTURE_EXECUTION_DO_NOT_PROVE_TENANT_RUNTIME_BEHAVIOUR",
+    "SOURCE_ONLY_OPERATIONAL_TESTS_AND_RUNTIME_EVIDENCE_ARE_NOT_COPIED_INTO_THE_PUBLIC_PACK",
+    "A_NEW_READ_ONLY_SOL_REVIEW_REMAINS_REQUIRED"
+  ]
+}

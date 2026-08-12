@@ -1,0 +1,1129 @@
+{
+  "schemaVersion": "1.0.0",
+  "flowCount": 12,
+  "staticContractEvidenceScope": "DOCUMENTARY_SANITIZATION_SNAPSHOT_NOT_EXECUTOR_OUTPUT",
+  "flows": [
+    {
+      "slug": "bootstrap-lists",
+      "category": "bootstrap/configuration",
+      "package": "packages/bootstrap-lists.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "bootstrap-lists.zip",
+      "flowId": "00000000-0000-4000-8000-000000005001",
+      "definition": "flows/bootstrap-lists/definition.json",
+      "packageManifest": "flows/bootstrap-lists/package-manifest.json",
+      "flowManifest": "flows/bootstrap-lists/flow-manifest.json",
+      "apisMap": "flows/bootstrap-lists/apis-map.json",
+      "connectionsMap": "flows/bootstrap-lists/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "Foreach",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection"
+        ],
+        "actionNames": [
+          "Apply_to_each_field_definition",
+          "Apply_to_each_list_definition",
+          "Create_field",
+          "Create_list",
+          "Initialize_field_definitions",
+          "Initialize_list_definitions"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "Foreach"
+        ],
+        "expressionCount": 8,
+        "runAfterCount": 4,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "Foreach",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection"
+        ],
+        "actionNames": [
+          "Apply_to_each_field_definition",
+          "Apply_to_each_list_definition",
+          "Create_field",
+          "Create_list",
+          "Initialize_field_definitions",
+          "Initialize_list_definitions"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "Foreach"
+        ],
+        "expressionCount": 8,
+        "runAfterCount": 4,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "add-columns-and-views",
+      "category": "bootstrap/configuration",
+      "package": "packages/add-columns-and-views.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "add-columns-and-views.zip",
+      "flowId": "00000000-0000-4000-8000-000000005002",
+      "definition": "flows/add-columns-and-views/definition.json",
+      "packageManifest": "flows/add-columns-and-views/package-manifest.json",
+      "flowManifest": "flows/add-columns-and-views/flow-manifest.json",
+      "apisMap": "flows/add-columns-and-views/apis-map.json",
+      "connectionsMap": "flows/add-columns-and-views/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "InitializeVariable",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection"
+        ],
+        "actionNames": [
+          "Add_view_field",
+          "Apply_to_each_index_definition",
+          "Apply_to_each_view_definition",
+          "Apply_to_each_view_field",
+          "Create_view",
+          "Enable_index",
+          "Initialize_index_definitions",
+          "Initialize_view_definitions",
+          "Initialize_view_fields"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach"
+        ],
+        "expressionCount": 10,
+        "runAfterCount": 6,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "InitializeVariable",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection"
+        ],
+        "actionNames": [
+          "Add_view_field",
+          "Apply_to_each_index_definition",
+          "Apply_to_each_view_definition",
+          "Apply_to_each_view_field",
+          "Create_view",
+          "Enable_index",
+          "Initialize_index_definitions",
+          "Initialize_view_definitions",
+          "Initialize_view_fields"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach"
+        ],
+        "expressionCount": 10,
+        "runAfterCount": 6,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "user-access-matrix",
+      "category": "bootstrap/configuration",
+      "package": "packages/user-access-matrix.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "user-access-matrix.zip",
+      "flowId": "00000000-0000-4000-8000-000000005003",
+      "definition": "flows/user-access-matrix/definition.json",
+      "packageManifest": "flows/user-access-matrix/package-manifest.json",
+      "flowManifest": "flows/user-access-matrix/flow-manifest.json",
+      "apisMap": "flows/user-access-matrix/apis-map.json",
+      "connectionsMap": "flows/user-access-matrix/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Scope",
+          "SetVariable",
+          "Terminate",
+          "Terminate",
+          "Terminate",
+          "Terminate",
+          "Terminate"
+        ],
+        "actionNames": [
+          "Add_role_assignment",
+          "Apply_access_changes",
+          "Apply_to_each_list_for_access",
+          "Apply_to_each_role_assignment",
+          "Break_role_inheritance",
+          "Compensate_reset_inheritance",
+          "Fail_if_expected_role_missing",
+          "Get_approved_principal",
+          "Get_role_assignment_bindings",
+          "Initialize_approved_bindings",
+          "Initialize_lists_for_access",
+          "Preflight_approved_principal",
+          "Preflight_escalations_list",
+          "Preflight_operator_role_definition",
+          "Preflight_reader_role_definition",
+          "Preflight_vendor_reference_list",
+          "Reset_role_inheritance",
+          "Set_access_contract_failed",
+          "Terminate_access_contract_failed",
+          "Terminate_after_compensation",
+          "Terminate_invalid_approved_binding",
+          "Terminate_invalid_approved_binding_response",
+          "Terminate_list_preflight_failed",
+          "Validate_access_contract_result",
+          "Validate_approved_binding_responses",
+          "Validate_approved_binding_shapes",
+          "Validate_list_preflight",
+          "Verify_role_assignments"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "Scope"
+        ],
+        "expressionCount": 24,
+        "runAfterCount": 23,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Scope",
+          "SetVariable",
+          "Terminate",
+          "Terminate",
+          "Terminate",
+          "Terminate",
+          "Terminate"
+        ],
+        "actionNames": [
+          "Add_role_assignment",
+          "Apply_access_changes",
+          "Apply_to_each_list_for_access",
+          "Apply_to_each_role_assignment",
+          "Break_role_inheritance",
+          "Compensate_reset_inheritance",
+          "Fail_if_expected_role_missing",
+          "Get_approved_principal",
+          "Get_role_assignment_bindings",
+          "Initialize_approved_bindings",
+          "Initialize_lists_for_access",
+          "Preflight_approved_principal",
+          "Preflight_escalations_list",
+          "Preflight_operator_role_definition",
+          "Preflight_reader_role_definition",
+          "Preflight_vendor_reference_list",
+          "Reset_role_inheritance",
+          "Set_access_contract_failed",
+          "Terminate_access_contract_failed",
+          "Terminate_after_compensation",
+          "Terminate_invalid_approved_binding",
+          "Terminate_invalid_approved_binding_response",
+          "Terminate_list_preflight_failed",
+          "Validate_access_contract_result",
+          "Validate_approved_binding_responses",
+          "Validate_approved_binding_shapes",
+          "Validate_list_preflight",
+          "Verify_role_assignments"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "Scope"
+        ],
+        "expressionCount": 24,
+        "runAfterCount": 23,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-cases-01",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-cases-01.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "seed-cases-01.zip",
+      "flowId": "00000000-0000-4000-8000-000000005004",
+      "definition": "flows/seed-cases-01/definition.json",
+      "packageManifest": "flows/seed-cases-01/package-manifest.json",
+      "flowManifest": "flows/seed-cases-01/flow-manifest.json",
+      "apisMap": "flows/seed-cases-01/apis-map.json",
+      "connectionsMap": "flows/seed-cases-01/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 36,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 36,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-cases-02",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-cases-02.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "seed-cases-02.zip",
+      "flowId": "00000000-0000-4000-8000-000000005005",
+      "definition": "flows/seed-cases-02/definition.json",
+      "packageManifest": "flows/seed-cases-02/package-manifest.json",
+      "flowManifest": "flows/seed-cases-02/flow-manifest.json",
+      "apisMap": "flows/seed-cases-02/apis-map.json",
+      "connectionsMap": "flows/seed-cases-02/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 36,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 36,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-vendors-01",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-vendors-01.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "seed-vendors-01.zip",
+      "flowId": "00000000-0000-4000-8000-000000005006",
+      "definition": "flows/seed-vendors-01/definition.json",
+      "packageManifest": "flows/seed-vendors-01/package-manifest.json",
+      "flowManifest": "flows/seed-vendors-01/flow-manifest.json",
+      "apisMap": "flows/seed-vendors-01/apis-map.json",
+      "connectionsMap": "flows/seed-vendors-01/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 13,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 13,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "seed-vendors-02",
+      "category": "seed/fixture-loader",
+      "package": "packages/seed-vendors-02.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "seed-vendors-02.zip",
+      "flowId": "00000000-0000-4000-8000-000000005007",
+      "definition": "flows/seed-vendors-02/definition.json",
+      "packageManifest": "flows/seed-vendors-02/package-manifest.json",
+      "flowManifest": "flows/seed-vendors-02/flow-manifest.json",
+      "apisMap": "flows/seed-vendors-02/apis-map.json",
+      "connectionsMap": "flows/seed-vendors-02/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 13,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Request"
+        ],
+        "actionTypes": [
+          "Foreach",
+          "If",
+          "InitializeVariable",
+          "InitializeVariable",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query"
+        ],
+        "actionNames": [
+          "Apply_to_each_embedded_seed_record",
+          "Create_target_list_item",
+          "Filter_embedded_records_with_lookup_key",
+          "Find_existing_unique_key",
+          "If_not_dry_run_and_unique_key_is_new",
+          "Initialize_dry_run",
+          "Initialize_seed_payload"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If"
+        ],
+        "expressionCount": 13,
+        "runAfterCount": 7,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "manual-move-trigger-test",
+      "category": "test/trigger",
+      "package": "packages/manual-move-trigger-test.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "manual-move-trigger-test.zip",
+      "flowId": "00000000-0000-4000-8000-000000005008",
+      "definition": "flows/manual-move-trigger-test/definition.json",
+      "packageManifest": "flows/manual-move-trigger-test/package-manifest.json",
+      "flowManifest": "flows/manual-move-trigger-test/flow-manifest.json",
+      "apisMap": "flows/manual-move-trigger-test/apis-map.json",
+      "connectionsMap": "flows/manual-move-trigger-test/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "OpenApiConnection"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Terminate"
+        ],
+        "actionNames": [
+          "Compose_MOVE_TRIGGER_TEST_RECEIVED",
+          "Terminate_succeeded"
+        ],
+        "branchTypes": [],
+        "expressionCount": 0,
+        "runAfterCount": 2,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "OpenApiConnection"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Terminate"
+        ],
+        "actionNames": [
+          "Compose_MOVE_TRIGGER_TEST_RECEIVED",
+          "Terminate_succeeded"
+        ],
+        "branchTypes": [],
+        "expressionCount": 0,
+        "runAfterCount": 2,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-west",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-west.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "fixture-queue-west-source.zip",
+      "flowId": "00000000-0000-4000-8000-000000005009",
+      "definition": "flows/ingest-queue-west/definition.json",
+      "packageManifest": "flows/ingest-queue-west/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-west/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-west/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-west/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-north",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-north.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "fixture-queue-north-source.zip",
+      "flowId": "00000000-0000-4000-8000-000000005010",
+      "definition": "flows/ingest-queue-north/definition.json",
+      "packageManifest": "flows/ingest-queue-north/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-north/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-north/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-north/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-east",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-east.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "fixture-queue-east-source.zip",
+      "flowId": "00000000-0000-4000-8000-000000005011",
+      "definition": "flows/ingest-queue-east/definition.json",
+      "packageManifest": "flows/ingest-queue-east/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-east/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-east/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-east/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    },
+    {
+      "slug": "ingest-queue-south",
+      "category": "ingest/recurrence",
+      "package": "packages/ingest-queue-south.zip",
+      "sourceEntryCount": 5,
+      "sourcePackageName": "fixture-queue-south-source.zip",
+      "flowId": "00000000-0000-4000-8000-000000005012",
+      "definition": "flows/ingest-queue-south/definition.json",
+      "packageManifest": "flows/ingest-queue-south/package-manifest.json",
+      "flowManifest": "flows/ingest-queue-south/flow-manifest.json",
+      "apisMap": "flows/ingest-queue-south/apis-map.json",
+      "connectionsMap": "flows/ingest-queue-south/connections-map.json",
+      "sourceContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "sanitizedContract": {
+        "triggerTypes": [
+          "Recurrence"
+        ],
+        "actionTypes": [
+          "Compose",
+          "Foreach",
+          "If",
+          "If",
+          "If",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "OpenApiConnection",
+          "Query",
+          "Terminate",
+          "Wait"
+        ],
+        "actionNames": [
+          "Add_a_row_into_a_table",
+          "Apply_to_each",
+          "Compose_UniqueKey",
+          "Condition",
+          "Condition_1",
+          "Delay",
+          "Filter_array",
+          "Get_emails_(V3)",
+          "List_rows_present_in_a_table",
+          "Terminate_outside_UK_window",
+          "Within_UK_weekday_window"
+        ],
+        "branchTypes": [
+          "Foreach",
+          "If",
+          "If",
+          "If"
+        ],
+        "expressionCount": 15,
+        "runAfterCount": 8,
+        "retryPolicyCount": 0
+      },
+      "contractPreserved": true,
+      "externalGates": {
+        "tenantImport": "RED_EXTERNAL_GATE",
+        "tenantReadback": "RED_EXTERNAL_GATE",
+        "authenticatedUat": "RED_EXTERNAL_GATE"
+      },
+      "fixtureMode": "local-definition-execution-with-fixture-connectors"
+    }
+  ]
+}

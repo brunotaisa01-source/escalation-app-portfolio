@@ -1,0 +1,354 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_view_definitions": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "viewDefinitions",
+                "type": "array",
+                "value": [
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "body": {
+                      "__metadata": {
+                        "type": "SP.View"
+                      },
+                      "Title": "Open",
+                      "PersonalView": false,
+                      "Paged": true,
+                      "RowLimit": 50,
+                      "ViewQuery": "<Where><In><FieldRef Name='Status'/><Values><Value Type='Text'>Action Required</Value><Value Type='Text'>In Progress</Value></Values></In></Where><OrderBy><FieldRef Name='ReceivedDateTime' Ascending='FALSE'/></OrderBy>"
+                    }
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Closed",
+                    "body": {
+                      "__metadata": {
+                        "type": "SP.View"
+                      },
+                      "Title": "Closed",
+                      "PersonalView": false,
+                      "Paged": true,
+                      "RowLimit": 50,
+                      "ViewQuery": "<Where><Eq><FieldRef Name='Status'/><Value Type='Text'>Closed</Value></Eq></Where><OrderBy><FieldRef Name='DateResolved' Ascending='FALSE'/></OrderBy>"
+                    }
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "All",
+                    "body": {
+                      "__metadata": {
+                        "type": "SP.View"
+                      },
+                      "Title": "All",
+                      "PersonalView": false,
+                      "Paged": true,
+                      "RowLimit": 50,
+                      "ViewQuery": "<OrderBy><FieldRef Name='ReceivedDateTime' Ascending='FALSE'/></OrderBy>"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Apply_to_each_view_definition": {
+          "type": "Foreach",
+          "foreach": "@variables('viewDefinitions')",
+          "actions": {
+            "Create_view": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/views')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose"
+                  },
+                  "parameters/body": "@items('Apply_to_each_view_definition')?['body']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_view_definitions": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_view_fields": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "viewFields",
+                "type": "array",
+                "value": [
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "fieldName": "UniqueKey"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "fieldName": "Status"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "fieldName": "Priority"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "fieldName": "Vendor"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "fieldName": "Source Queue"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Open",
+                    "fieldName": "Received Date Time"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Closed",
+                    "fieldName": "UniqueKey"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Closed",
+                    "fieldName": "Status"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "Closed",
+                    "fieldName": "Date Resolved"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "All",
+                    "fieldName": "UniqueKey"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "All",
+                    "fieldName": "Status"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "All",
+                    "fieldName": "Vendor"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "viewTitle": "All",
+                    "fieldName": "Source Queue"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "viewTitle": "All Items",
+                    "fieldName": "Vendor"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "viewTitle": "All Items",
+                    "fieldName": "Vendor Name"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "viewTitle": "All Items",
+                    "fieldName": "Vendor Category"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "viewTitle": "All Items",
+                    "fieldName": "Vendor Lookup Key"
+                  }
+                ]
+              }
+            ]
+          },
+          "runAfter": {
+            "Apply_to_each_view_definition": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_to_each_view_field": {
+          "type": "Foreach",
+          "foreach": "@variables('viewFields')",
+          "actions": {
+            "Add_view_field": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/views/getbytitle(''', item()?['viewTitle'], ''')/ViewFields/AddViewField(''', item()?['fieldName'], ''')')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose"
+                  },
+                  "parameters/body": {}
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_view_fields": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_index_definitions": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "indexDefinitions",
+                "type": "array",
+                "value": [
+                  {
+                    "listTitle": "Demo Escalations",
+                    "fieldName": "UniqueKey"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "fieldName": "Status"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "fieldName": "Source Queue"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "fieldName": "Received Date Time"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "fieldName": "Escalation Date"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "fieldName": "AP Owner"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "fieldName": "Vendor"
+                  }
+                ]
+              }
+            ]
+          },
+          "runAfter": {
+            "Apply_to_each_view_field": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_to_each_index_definition": {
+          "type": "Foreach",
+          "foreach": "@variables('indexDefinitions')",
+          "actions": {
+            "Enable_index": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/fields/getbyinternalnameortitle(''', item()?['fieldName'], ''')')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose",
+                    "IF-MATCH": "*",
+                    "X-HTTP-Method": "MERGE"
+                  },
+                  "parameters/body": {
+                    "__metadata": {
+                      "type": "SP.Field"
+                    },
+                    "Indexed": true
+                  }
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_index_definitions": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Demo Escalation - Columns and Views"
+  },
+  "name": "00000000-0000-4000-8000-000000005002",
+  "id": "00000000-0000-4000-8000-000000005002",
+  "type": "Microsoft.Flow/flows"
+}

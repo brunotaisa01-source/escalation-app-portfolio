@@ -1,0 +1,52 @@
+{
+  "schema": "1.0",
+  "details": {
+    "displayName": "Escalation 01 Seed Loader Vendor Reference Chunk 1 IMPORT",
+    "description": "Native Power Automate Legacy import package for Escalation 01 Seed Loader Vendor Reference Chunk 1 IMPORT.",
+    "createdTime": "2026-01-15T00:00:00.000Z",
+    "packageTelemetryId": "00000000-0000-4000-8000-000000001000",
+    "creator": "N/A",
+    "sourceEnvironment": ""
+  },
+  "resources": {
+    "00000000-0000-4000-8000-000000001001": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+      "name": "shared_sharepointonline",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "SharePoint"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "00000000-0000-4000-8000-000000001002": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "SharePoint connection"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "00000000-0000-4000-8000-000000001001"
+      ]
+    },
+    "00000000-0000-4000-8000-000000005006": {
+      "type": "Microsoft.Flow/flows",
+      "suggestedCreationType": "New",
+      "creationType": "New",
+      "details": {
+        "displayName": "Escalation 01 Seed Loader Vendor Reference Chunk 1 IMPORT"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Root",
+      "dependsOn": [
+        "00000000-0000-4000-8000-000000001001",
+        "00000000-0000-4000-8000-000000001002"
+      ]
+    }
+  }
+}

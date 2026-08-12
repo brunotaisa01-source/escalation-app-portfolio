@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "mode": "fictional-fixture",
+  "vendors": [
+    { "Vendor": "100001", "VendorName": "Fixture Vendor One", "VendorCategory": "Services", "VendorLookupKey": "100001" },
+    { "Vendor": "100002", "VendorName": "Fixture Vendor Two", "VendorCategory": "Goods", "VendorLookupKey": "100002" },
+    { "Vendor": "100003", "VendorName": "Fixture Vendor Three", "VendorCategory": "Utilities", "VendorLookupKey": "100003" }
+  ]
+}

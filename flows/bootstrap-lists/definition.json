@@ -1,0 +1,300 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_list_definitions": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "listDefinitions",
+                "type": "array",
+                "value": [
+                  {
+                    "uri": "_api/web/lists",
+                    "body": {
+                      "__metadata": {
+                        "type": "SP.List"
+                      },
+                      "BaseTemplate": 100,
+                      "Title": "Demo Escalations",
+                      "Description": "Demo Escalation operational cases",
+                      "AllowContentTypes": true,
+                      "EnableVersioning": true
+                    }
+                  },
+                  {
+                    "uri": "_api/web/lists",
+                    "body": {
+                      "__metadata": {
+                        "type": "SP.List"
+                      },
+                      "BaseTemplate": 100,
+                      "Title": "Demo Vendor Reference",
+                      "Description": "Demo Escalation exact vendor reference",
+                      "AllowContentTypes": false,
+                      "EnableVersioning": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Apply_to_each_list_definition": {
+          "type": "Foreach",
+          "foreach": "@variables('listDefinitions')",
+          "actions": {
+            "Create_list": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@items('Apply_to_each_list_definition')?['uri']",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose"
+                  },
+                  "parameters/body": "@items('Apply_to_each_list_definition')?['body']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_list_definitions": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_field_definitions": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "fieldDefinitions",
+                "type": "array",
+                "value": [
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='UniqueKey' DisplayName='UniqueKey' Indexed='TRUE' EnforceUniqueValues='TRUE' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='OriginalUniqueKey' DisplayName='Original UniqueKey' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='Mailbox' DisplayName='Mailbox' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='SourceQueue' DisplayName='Source Queue' Indexed='TRUE' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='From' DisplayName='From' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='Reference' DisplayName='Reference' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='DateTime' Name='ReceivedDateTime' DisplayName='Received Date Time' Indexed='TRUE' Format='DateTime' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='InternetMessageId' DisplayName='Internet Message ID' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='OutlookMessageId' DisplayName='Outlook Message ID' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='ConversationId' DisplayName='Conversation ID' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='SMarker' DisplayName='SMarker' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='Vendor' DisplayName='Vendor' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='VendorName' DisplayName='Vendor Name' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='VendorCategory' DisplayName='Vendor Category' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='Entity' DisplayName='Entity' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='DateTime' Name='DocDate' DisplayName='Doc Date' Format='DateOnly' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='InvRef' DisplayName='Inv Ref' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Number' Name='Value' DisplayName='Value' Decimals='2' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='ActionType' DisplayName='Action Type' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Choice' Name='Priority' DisplayName='Priority' Format='Dropdown'><CHOICES><CHOICE>Low</CHOICE><CHOICE>Medium</CHOICE><CHOICE>High</CHOICE><CHOICE>Critical</CHOICE></CHOICES></Field>"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Text' Name='APOwner' DisplayName='AP Owner' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='DateTime' Name='EscalationDate' DisplayName='Escalation Date' Format='DateOnly' Indexed='TRUE' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Note' Name='WorkingNotes' DisplayName='Working Notes' NumLines='6' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='DateTime' Name='DateResolved' DisplayName='Date Resolved' Format='DateOnly' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Choice' Name='Status' DisplayName='Status' Format='Dropdown' Indexed='TRUE'><CHOICES><CHOICE>Action Required</CHOICE><CHOICE>In Progress</CHOICE><CHOICE>Closed</CHOICE></CHOICES></Field>"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Number' Name='DaysToResolve' DisplayName='Days To Resolve' Decimals='0' />"
+                  },
+                  {
+                    "listTitle": "Demo Escalations",
+                    "schemaXml": "<Field Type='Boolean' Name='IsClosed' DisplayName='Is Closed' />"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "schemaXml": "<Field Type='Text' Name='Vendor' DisplayName='Vendor' />"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "schemaXml": "<Field Type='Text' Name='VendorName' DisplayName='Vendor Name' />"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "schemaXml": "<Field Type='Text' Name='VendorCategory' DisplayName='Vendor Category' />"
+                  },
+                  {
+                    "listTitle": "Demo Vendor Reference",
+                    "schemaXml": "<Field Type='Text' Name='VendorLookupKey' DisplayName='Vendor Lookup Key' Indexed='TRUE' EnforceUniqueValues='TRUE' />"
+                  }
+                ]
+              }
+            ]
+          },
+          "runAfter": {
+            "Apply_to_each_list_definition": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_to_each_field_definition": {
+          "type": "Foreach",
+          "foreach": "@variables('fieldDefinitions')",
+          "actions": {
+            "Create_field": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "POST",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''', item()?['listTitle'], ''')/fields/CreateFieldAsXml')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose"
+                  },
+                  "parameters/body": {
+                    "parameters": {
+                      "__metadata": {
+                        "type": "SP.XmlSchemaFieldCreationInformation"
+                      },
+                      "SchemaXml": "@items('Apply_to_each_field_definition')?['schemaXml']",
+                      "Options": 0
+                    }
+                  }
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "connectionName": "fixture-connection"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_field_definitions": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Demo Escalation - Bootstrap Lists"
+  },
+  "name": "00000000-0000-4000-8000-000000005001",
+  "id": "00000000-0000-4000-8000-000000005001",
+  "type": "Microsoft.Flow/flows"
+}

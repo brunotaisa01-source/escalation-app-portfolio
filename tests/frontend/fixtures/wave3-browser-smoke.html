@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wave 3 synthetic workbench smoke</title>
+    <link rel="stylesheet" href="../../../frontend/src/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content"><div id="app-root">Loading synthetic workbench…</div></main>
+    <script type="module">
+      import { createCaseService } from '../../../frontend/src/services/case-service.js';
+      import { renderApp } from '../../../frontend/src/ui/app.js';
+
+      const rows = Array.from({ length: 233 }, (_, index) => {
+        const id = 1800 + index;
+        const closed = id === 1826;
+        return {
+          id,
+          Title: `Synthetic escalation ${id}`,
+          Status: closed ? 'Closed' : index % 2 ? 'In Progress' : 'Action Required',
+          Priority: id % 11 === 0 ? 'Critical' : id % 3 === 0 ? 'High' : 'Low',
+          ReceivedDateTime: id === 1826 ? '2026-07-06T11:22:00Z' : `2026-07-${String(7 + (index % 10)).padStart(2, '0')}T10:00:00Z`,
+          SourceQueue: index % 2 ? 'Fixture-East' : 'Fixture-West',
+          Mailbox: 'Synthetic mailbox',
+          From: `sender-${id}@example.invalid`,
+          Reference: `REF-${id}`,
+          Vendor: id % 5 ? `V-${id}` : '',
+          VendorName: id % 5 ? `Vendor ${id}` : '',
+          VendorCategory: id % 5 ? 'Goods' : '',
+          Entity: index % 2 ? 'DEMO-ENTITY-05' : 'DEMO-ENTITY-02',
+          Value: id,
+          ActionType: 'Investigate',
+          APOwner: id === 1826 ? 'Fixture Owner 02' : 'Fixture Owner 01',
+          WorkingNotes: `Notes ${id}`,
+          DateResolved: closed ? '2026-07-06T15:00:00Z' : '2026-07-09',
+          DocDate: id === 1826 ? '2026-07-06' : '2026-07-08',
+          InvRef: `INV-${id}`,
+          EscalationDate: id === 1826 ? '2026-07-05T23:00:00Z' : '2026-07-06',
+        };
+      });
+      const base = createCaseService(rows);
+      const smoke = { queries: [], exports: [], kpiScans: 0, patches: [], errorFlashes: 0 };
+      const friendlyDelay = { '1': 2500, '18': 2100, '182': 1700, '1826': 60 };
+      const clone = (value) => structuredClone(value);
+      const service = {
+        ...base,
+        query(request) {
+          smoke.queries.push(clone(request));
+          const value = request.columnFilters?.EscalationId?.value;
+          const delay = friendlyDelay[value] ?? 20;
+          return new Promise((resolve) => setTimeout(() => resolve(base.query(request)), delay));
+        },
+        loadKpis() {
+          smoke.kpiScans += 1;
+          return new Promise((resolve) => setTimeout(() => resolve(base.counts()), smoke.kpiScans === 1 ? 300 : 40));
+        },
+        exportAll(request) {
+          smoke.exports.push(clone(request));
+          return base.exportAll(request);
+        },
+        update(id, patch, etag) {
+          smoke.patches.push({ id, patch: clone(patch), etag });
+          return base.update(id, patch, etag);
+        },
+      };
+      const governedValues = {
+        Status: ['Action Required', 'In Progress', 'Closed', 'Duplicate'],
+        Priority: ['Critical', 'High', 'Medium', 'Low'],
+        ActionType: ['Investigate'],
+        APOwner: ['Fixture Owner 01', 'Fixture Owner 02'],
+        Entity: ['DEMO-ENTITY-05', 'DEMO-ENTITY-02'],
+      };
+      new MutationObserver(() => {
+        if (document.querySelector('.error-state')) smoke.errorFlashes += 1;
+      }).observe(document.body, { childList: true, subtree: true });
+      window.__SMOKE__ = smoke;
+      renderApp(document.querySelector('#app-root'), {
+        config: { mode: 'mock', pageSize: 10, governedValues, filterOptions: governedValues },
+        service,
+      });
+    </script>
+  </body>
+</html>

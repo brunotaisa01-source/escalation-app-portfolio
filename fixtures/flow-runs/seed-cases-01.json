@@ -1,0 +1,24 @@
+{
+  "flowSlug": "seed-cases-01",
+  "mode": "local-mock",
+  "tenantCalls": 0,
+  "deterministicNow": "2026-01-15T12:00:00Z",
+  "triggerInput": {
+    "fixtureRunId": "RUN-SEED_CASES_01-001",
+    "dryRun": true
+  },
+  "connectorResponses": {
+    "Apply_to_each_embedded_seed_record/Find_existing_unique_key": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] },
+    "Apply_to_each_embedded_seed_record/If_not_dry_run_and_unique_key_is_new/Create_target_list_item": { "attempts": [{ "status": "Succeeded", "outputs": { "statusCode": 200, "body": { "value": [] } } }] }
+  },
+  "expected": {
+    "status": "Succeeded",
+    "requiredActions": ["Filter_embedded_records_with_lookup_key", "Find_existing_unique_key", "If_not_dry_run_and_unique_key_is_new"],
+    "externalGates": [
+      "tenantImport",
+      "tenantReadback",
+      "authenticatedUat"
+    ]
+  },
+  "expectedStatus": "LOCAL_MOCK_GREEN"
+}

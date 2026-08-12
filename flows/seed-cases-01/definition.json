@@ -1,0 +1,340 @@
+{
+  "name": "00000000-0000-4000-8000-000000005004",
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dryRun": {
+                  "type": "boolean",
+                  "default": true
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_dry_run": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "dryRun",
+                "type": "boolean",
+                "value": "@coalesce(triggerBody()?['dryRun'], true)"
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Initialize_seed_payload": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "seedPayload",
+                "type": "object",
+                "value": {
+                  "schemaVersion": "1.0.0",
+                  "rowCount": 3,
+                  "fields": [
+                    "UniqueKey",
+                    "OriginalUniqueKey",
+                    "Mailbox",
+                    "SourceQueue",
+                    "From",
+                    "Reference",
+                    "ReceivedDateTime",
+                    "InternetMessageId",
+                    "OutlookMessageId",
+                    "ConversationId",
+                    "SMarker",
+                    "Vendor",
+                    "VendorName",
+                    "VendorCategory",
+                    "Entity",
+                    "DocDate",
+                    "InvRef",
+                    "Value",
+                    "ActionType",
+                    "Priority",
+                    "APOwner",
+                    "EscalationDate",
+                    "WorkingNotes",
+                    "DateResolved",
+                    "Status",
+                    "DaysToResolve",
+                    "IsClosed"
+                  ],
+                  "sha256": "0034de76c86bf9c932268ca4fcd3b54fe63caa6447a9470bdb87a469021a31b9",
+                  "records": [
+                    [
+                      "FIX-CASE-20260115-0001",
+                      null,
+                      "Fixture Operations",
+                      "Fixture-East",
+                      "fixture.sender@example.invalid",
+                      "REF-FIX-0001",
+                      "2026-01-15T09:00:00Z",
+                      "<fixture-case-0001@example.invalid>",
+                      "FIXTURE-OUTLOOK-0001",
+                      "FIXTURE-CONV-0001",
+                      "FIXTURE",
+                      "V-00001",
+                      "Fixture Vendor One",
+                      "Services",
+                      "DEMO-ENTITY-01",
+                      "2026-01-14",
+                      "INV-FIX-0001",
+                      125.5,
+                      "Invoice review",
+                      "High",
+                      "Fixture Owner 01",
+                      "2026-01-15T10:00:00Z",
+                      "Deterministic fictional fixture case one.",
+                      null,
+                      "Action Required",
+                      null,
+                      false
+                    ],
+                    [
+                      "FIX-CASE-20260115-0002",
+                      null,
+                      "Fixture Operations",
+                      "Fixture-North",
+                      "fixture.sender@example.invalid",
+                      "REF-FIX-0002",
+                      "2026-01-14T11:30:00Z",
+                      "<fixture-case-0002@example.invalid>",
+                      "FIXTURE-OUTLOOK-0002",
+                      "FIXTURE-CONV-0002",
+                      "FIXTURE",
+                      "V-00002",
+                      "Fixture Vendor Two",
+                      "Goods",
+                      "DEMO-ENTITY-02",
+                      "2026-01-13",
+                      "INV-FIX-0002",
+                      840.0,
+                      "Document review",
+                      "Medium",
+                      "Fixture Owner 02",
+                      "2026-01-15T09:00:00Z",
+                      "Deterministic fictional fixture case two.",
+                      "2026-01-15T13:00:00Z",
+                      "Closed",
+                      2,
+                      true
+                    ],
+                    [
+                      "FIX-CASE-20260115-0003",
+                      null,
+                      "Fixture Operations",
+                      "Fixture-South",
+                      "fixture.sender@example.invalid",
+                      "REF-FIX-0003",
+                      "2026-01-13T15:45:00Z",
+                      "<fixture-case-0003@example.invalid>",
+                      "FIXTURE-OUTLOOK-0003",
+                      "FIXTURE-CONV-0003",
+                      "FIXTURE",
+                      "V-00003",
+                      "Fixture Vendor Three",
+                      "Utilities",
+                      "DEMO-ENTITY-03",
+                      "2026-01-12",
+                      "INV-FIX-0003",
+                      42.75,
+                      "Manual review",
+                      "Low",
+                      "Fixture Owner 03",
+                      "2026-01-14T08:00:00Z",
+                      "Deterministic fictional fixture case three.",
+                      null,
+                      "In Progress",
+                      1,
+                      false
+                    ]
+                  ]
+                }
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_dry_run": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Filter_embedded_records_with_lookup_key": {
+          "type": "Query",
+          "inputs": {
+            "from": "@variables('seedPayload')?['records']",
+            "where": "@not(empty(item()?[0]))"
+          },
+          "runAfter": {
+            "Initialize_seed_payload": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_to_each_embedded_seed_record": {
+          "type": "Foreach",
+          "foreach": "@body('Filter_embedded_records_with_lookup_key')",
+          "actions": {
+            "Find_existing_unique_key": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "GET",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''Demo Escalations'')/items?$select=Id,UniqueKey&$filter=UniqueKey%20eq%20''', encodeUriComponent(replace(string(items('Apply_to_each_embedded_seed_record')?[0]),'''','''''')), '''')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=nometadata",
+                    "Content-Type": "application/json;odata=nometadata"
+                  },
+                  "parameters/body": {}
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "connectionName": "fixture-connection",
+                  "operationId": "HttpRequest"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runAfter": {}
+            },
+            "If_not_dry_run_and_unique_key_is_new": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@variables('dryRun')",
+                      false
+                    ]
+                  },
+                  {
+                    "equals": [
+                      "@length(body('Find_existing_unique_key')?['value'])",
+                      0
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Create_target_list_item": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://example.invalid/sites/DemoPortal",
+                      "parameters/method": "POST",
+                      "parameters/uri": "_api/web/lists/getbytitle('Demo Escalations')/items",
+                      "parameters/headers": {
+                        "Accept": "application/json;odata=nometadata",
+                        "Content-Type": "application/json;odata=nometadata"
+                      },
+                      "parameters/body": {
+                        "UniqueKey": "@items('Apply_to_each_embedded_seed_record')?[0]",
+                        "Original_x0020_UniqueKey": "@items('Apply_to_each_embedded_seed_record')?[1]",
+                        "Mailbox": "@items('Apply_to_each_embedded_seed_record')?[2]",
+                        "Source_x0020_Queue": "@items('Apply_to_each_embedded_seed_record')?[3]",
+                        "From": "@items('Apply_to_each_embedded_seed_record')?[4]",
+                        "Reference": "@items('Apply_to_each_embedded_seed_record')?[5]",
+                        "Received_x0020_Date_x0020_Time": "@items('Apply_to_each_embedded_seed_record')?[6]",
+                        "Internet_x0020_Message_x0020_ID": "@items('Apply_to_each_embedded_seed_record')?[7]",
+                        "Outlook_x0020_Message_x0020_ID": "@items('Apply_to_each_embedded_seed_record')?[8]",
+                        "Conversation_x0020_ID": "@items('Apply_to_each_embedded_seed_record')?[9]",
+                        "SMarker": "@items('Apply_to_each_embedded_seed_record')?[10]",
+                        "Vendor": "@items('Apply_to_each_embedded_seed_record')?[11]",
+                        "Vendor_x0020_Name": "@items('Apply_to_each_embedded_seed_record')?[12]",
+                        "Vendor_x0020_Category": "@items('Apply_to_each_embedded_seed_record')?[13]",
+                        "Entity": "@items('Apply_to_each_embedded_seed_record')?[14]",
+                        "Doc_x0020_Date": "@items('Apply_to_each_embedded_seed_record')?[15]",
+                        "Inv_x0020_Ref": "@items('Apply_to_each_embedded_seed_record')?[16]",
+                        "Value": "@items('Apply_to_each_embedded_seed_record')?[17]",
+                        "Action_x0020_Type": "@items('Apply_to_each_embedded_seed_record')?[18]",
+                        "Priority": "@items('Apply_to_each_embedded_seed_record')?[19]",
+                        "AP_x0020_Owner": "@items('Apply_to_each_embedded_seed_record')?[20]",
+                        "Escalation_x0020_Date": "@items('Apply_to_each_embedded_seed_record')?[21]",
+                        "Working_x0020_Notes": "@items('Apply_to_each_embedded_seed_record')?[22]",
+                        "Date_x0020_Resolved": "@items('Apply_to_each_embedded_seed_record')?[23]",
+                        "Status": "@items('Apply_to_each_embedded_seed_record')?[24]",
+                        "Days_x0020_To_x0020_Resolve": "@items('Apply_to_each_embedded_seed_record')?[25]",
+                        "Is_x0020_Closed": "@items('Apply_to_each_embedded_seed_record')?[26]"
+                      }
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "connectionName": "fixture-connection",
+                      "operationId": "HttpRequest"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runAfter": {}
+                }
+              },
+              "else": {
+                "actions": {}
+              },
+              "runAfter": {
+                "Find_existing_unique_key": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 1
+            }
+          },
+          "runAfter": {
+            "Filter_embedded_records_with_lookup_key": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "metadata": {
+      "loaderType": "embedded-json",
+      "targetList": "Demo Escalations",
+      "targetKeyField": "UniqueKey",
+      "chunkIndex": 1,
+      "chunkCount": 2,
+      "lookupKey": "UniqueKey text"
+    },
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Escalation 01 Seed Loader Escalations Chunk 1 IMPORT"
+  },
+  "id": "00000000-0000-4000-8000-000000005004",
+  "type": "Microsoft.Flow/flows"
+}

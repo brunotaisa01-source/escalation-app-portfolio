@@ -1,0 +1,141 @@
+{
+  "templateStatus": "TEMPLATE_REBIND_REQUIRED",
+  "importOrder": [
+    "bootstrap-lists.zip",
+    "add-columns-and-views.zip",
+    "user-access-matrix.zip",
+    "seed-vendors-01.zip",
+    "seed-vendors-02.zip",
+    "seed-cases-01.zip",
+    "seed-cases-02.zip",
+    "manual-move-trigger-test.zip",
+    "ingest-queue-west.zip",
+    "ingest-queue-north.zip",
+    "ingest-queue-east.zip",
+    "ingest-queue-south.zip"
+  ],
+  "importOrderNotes": {
+    "manual-move-trigger-test.zip": "Test-only trigger package; import after seed packages and bind only in an isolated validation environment.",
+    "ingest-queue-west.zip": "Fixture ingest package; import after lists, access configuration, and seed packages.",
+    "ingest-queue-north.zip": "Fixture ingest package; import after lists, access configuration, and seed packages.",
+    "ingest-queue-east.zip": "Fixture ingest package; import after lists, access configuration, and seed packages.",
+    "ingest-queue-south.zip": "Fixture ingest package; import after lists, access configuration, and seed packages."
+  },
+  "requiredManualBindings": [
+    "sharePointSiteUrl",
+    "escalationsListTitle",
+    "vendorReferenceListTitle",
+    "connectorConnectionReferences",
+    "approvedPrincipalIds",
+    "approvedRoleDefinitionIds",
+    "sharedMailboxBindings",
+    "ingestWorkbookBindings"
+  ],
+  "bindingInstructions": {
+    "sharePointSiteUrl": {
+      "instruction": "Replace the placeholder site URL in every listed definition with the approved target SharePoint site URL before tenant import.",
+      "placeholders": ["https://example.invalid/sites/DemoPortal"],
+      "occurrencePaths": [
+        "flows/bootstrap-lists/definition.json",
+        "flows/add-columns-and-views/definition.json",
+        "flows/user-access-matrix/definition.json",
+        "flows/seed-vendors-01/definition.json",
+        "flows/seed-vendors-02/definition.json",
+        "flows/seed-cases-01/definition.json",
+        "flows/seed-cases-02/definition.json"
+      ]
+    },
+    "escalationsListTitle": {
+      "instruction": "Confirm or replace the demo escalation list title consistently in all listed definitions during the controlled rebind step.",
+      "placeholders": ["Demo Escalations"],
+      "occurrencePaths": [
+        "flows/bootstrap-lists/definition.json",
+        "flows/add-columns-and-views/definition.json",
+        "flows/user-access-matrix/definition.json",
+        "flows/seed-cases-01/definition.json",
+        "flows/seed-cases-02/definition.json"
+      ]
+    },
+    "vendorReferenceListTitle": {
+      "instruction": "Confirm or replace the demo vendor-reference list title consistently in all listed definitions during the controlled rebind step.",
+      "placeholders": ["Demo Vendor Reference"],
+      "occurrencePaths": [
+        "flows/bootstrap-lists/definition.json",
+        "flows/add-columns-and-views/definition.json",
+        "flows/user-access-matrix/definition.json",
+        "flows/seed-vendors-01/definition.json",
+        "flows/seed-vendors-02/definition.json"
+      ]
+    },
+    "connectorConnectionReferences": {
+      "instruction": "Use the tenant import rebind UI to replace every fixture connection reference with an approved connection for the matching connector API.",
+      "placeholders": ["fixture-connection"],
+      "occurrencePaths": [
+        "flows/bootstrap-lists/definition.json",
+        "flows/add-columns-and-views/definition.json",
+        "flows/user-access-matrix/definition.json",
+        "flows/seed-vendors-01/definition.json",
+        "flows/seed-vendors-02/definition.json",
+        "flows/seed-cases-01/definition.json",
+        "flows/seed-cases-02/definition.json",
+        "flows/manual-move-trigger-test/definition.json",
+        "flows/ingest-queue-west/definition.json",
+        "flows/ingest-queue-north/definition.json",
+        "flows/ingest-queue-east/definition.json",
+        "flows/ingest-queue-south/definition.json"
+      ]
+    },
+    "approvedPrincipalIds": {
+      "instruction": "Replace each synthetic principal ID in the access-matrix definition with an explicitly approved tenant principal ID before import.",
+      "placeholders": ["FIXTURE-ID-001"],
+      "occurrencePaths": ["flows/user-access-matrix/definition.json"]
+    },
+    "approvedRoleDefinitionIds": {
+      "instruction": "Verify the operator and reader role-definition IDs against the target tenant and replace both values before import when they differ.",
+      "placeholders": ["1073741830", "1073741826"],
+      "occurrencePaths": ["flows/user-access-matrix/definition.json"]
+    },
+    "sharedMailboxBindings": {
+      "instruction": "Replace the synthetic mailbox address and folder resource with the approved shared mailbox and folder during connector rebind.",
+      "placeholders": ["fixture.sender@example.invalid", "Id::FIXTURE-RESOURCE-006"],
+      "occurrencePaths": [
+        "flows/manual-move-trigger-test/definition.json",
+        "flows/ingest-queue-west/definition.json",
+        "flows/ingest-queue-north/definition.json",
+        "flows/ingest-queue-east/definition.json",
+        "flows/ingest-queue-south/definition.json"
+      ]
+    },
+    "ingestWorkbookBindings": {
+      "instruction": "Replace each synthetic workbook source, drive, file, and table value with the approved queue workbook binding before enabling recurrence.",
+      "placeholders": [
+        "sites/example.invalid,00000000-0000-4000-8000-000000000901,00000000-0000-4000-8000-000000000902",
+        "me",
+        "b!FIXTURE-DRIVE-001",
+        "b!FIXTURE-DRIVE-002",
+        "FIXTURE-FILE-QUEUE-001",
+        "FIXTURE-FILE-QUEUE-002",
+        "{00000000-0000-4000-8000-000000001011}"
+      ],
+      "occurrencePaths": [
+        "flows/ingest-queue-west/definition.json",
+        "flows/ingest-queue-north/definition.json",
+        "flows/ingest-queue-east/definition.json",
+        "flows/ingest-queue-south/definition.json"
+      ]
+    }
+  },
+  "flowDirectoryContract": [
+    "manifest.json",
+    "Microsoft.Flow/flows/manifest.json",
+    "Microsoft.Flow/flows/<flow-id>/definition.json",
+    "Microsoft.Flow/flows/<flow-id>/apisMap.json",
+    "Microsoft.Flow/flows/<flow-id>/connectionsMap.json"
+  ],
+  "externalGates": {
+    "tenantImport": "RED_EXTERNAL_GATE",
+    "tenantRebind": "RED_EXTERNAL_GATE",
+    "tenantReadback": "RED_EXTERNAL_GATE",
+    "authenticatedUat": "RED_EXTERNAL_GATE"
+  }
+}

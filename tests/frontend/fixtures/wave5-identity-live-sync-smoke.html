@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Identity and background sync smoke</title>
+    <link rel="stylesheet" href="../../../frontend/src/styles.css" />
+  </head>
+  <body>
+    <main id="main-content"><div id="app-root">Loading…</div></main>
+    <script type="module">
+      import { createCaseService } from '../../../frontend/src/services/case-service.js';
+      import { renderApp } from '../../../frontend/src/ui/app.js';
+
+      const governedValues = {
+        Status: ['Action Required', 'In Progress', 'Closed', 'Duplicate'],
+        Priority: ['Critical', 'High', 'Medium', 'Low'],
+        ActionType: ['Investigate'],
+        APOwner: ['Fixture Owner 01', 'Avery Example'],
+        Entity: ['DEMO-ENTITY-05'],
+      };
+      const base = createCaseService([{
+        id: 1, Title: 'Shared escalation', Status: 'Action Required', Priority: 'High',
+        ReceivedDateTime: '2026-07-21T09:00:00Z', SourceQueue: 'Fixture-East', From: 'sender@example.invalid',
+        Reference: 'REF-LIVE-1', Vendor: 'V-1', VendorName: 'Shared Vendor', VendorCategory: 'Goods',
+        Entity: 'DEMO-ENTITY-05', ActionType: 'Investigate', APOwner: 'Fixture Owner 01',
+        WorkingNotes: 'Authoritative start', DateResolved: '2026-07-21',
+      }]);
+      const smoke = { queries: 0, identityReads: 0, invalidations: [], patches: [] };
+      const service = {
+        ...base,
+        async getCurrentUser() {
+          smoke.identityReads += 1;
+          await new Promise((resolve) => setTimeout(resolve, 300));
+          return { displayName: 'Avery Example', email: 'avery.user@example.invalid', loginName: 'member|avery.user@example.invalid' };
+        },
+        invalidateReadCaches(options) { smoke.invalidations.push(structuredClone(options)); },
+        query(request) { smoke.queries += 1; return base.query(request); },
+        update(id, patch, etag) { smoke.patches.push({ id, patch, etag }); return base.update(id, patch, etag); },
+      };
+      smoke.externalUpdate = (notes) => {
+        const item = base.snapshot()[0];
+        base.update(item.id, { WorkingNotes: notes }, item.__etag);
+      };
+      window.__SMOKE__ = smoke;
+      renderApp(document.querySelector('#app-root'), {
+        config: { mode: 'mock', pageSize: 10, backgroundRefreshMs: 5000, governedValues },
+        service,
+      });
+    </script>
+  </body>
+</html>

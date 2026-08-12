@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Synthetic workbench smoke</title>
+    <link rel="stylesheet" href="../../../frontend/src/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content"><div id="app-root">Loading synthetic workbench…</div></main>
+    <script type="module">
+      import { createCaseService } from '../../../frontend/src/services/case-service.js';
+      import { renderApp } from '../../../frontend/src/ui/app.js';
+
+      const baseService = createCaseService([
+        {
+          id: 148, Title: 'Invoice, escalation "A"', Status: 'Action Required', Priority: 'Critical',
+          ReceivedDateTime: '2026-07-20T09:15:00Z', SourceQueue: 'Fixture-East', From: 'synthetic@example.invalid',
+          Reference: 'REF-148', Vendor: '', VendorName: '', VendorCategory: '', Entity: 'DEMO-ENTITY-05', Value: 1200.5,
+          ActionType: 'Investigate', APOwner: 'Owner A', WorkingNotes: 'Synthetic only', DateResolved: '2026-07-20',
+          DocDate: '2026-07-18', InvRef: 'INV-148', EscalationDate: '2026-07-20',
+          DaysToResolve: 0,
+          InternetMessageId: 'hidden-internet-id', OutlookMessageId: 'hidden-outlook-id',
+          ConversationId: 'hidden-conversation-id', UniqueKey: 'hidden-unique-key',
+          OriginalUniqueKey: 'hidden-original-key', SMarker: 'hidden-marker',
+        },
+        {
+          id: 149, Title: 'Second synthetic case', Status: 'In Progress', Priority: 'High',
+          ReceivedDateTime: '2026-07-19T10:00:00Z', SourceQueue: 'Fixture-West', From: 'second@example.invalid',
+          Reference: 'REF-149', Vendor: 'V-149', VendorName: 'Synthetic Vendor', VendorCategory: 'Goods',
+          Entity: 'DEMO-ENTITY-02', Value: 0, ActionType: 'Investigate', APOwner: 'Owner B',
+          WorkingNotes: 'Line one\nLine two', DateResolved: '2026-07-19', DocDate: '2026-07-17',
+          InvRef: 'INV-149', EscalationDate: '2026-07-19',
+          DaysToResolve: 1,
+        },
+        {
+          id: 150, Title: 'Closed synthetic case', Status: 'Closed', Priority: 'Low',
+          ReceivedDateTime: '2026-07-18T11:00:00Z', SourceQueue: 'Fixture-East', From: 'closed@example.invalid',
+          Reference: 'REF-150', Vendor: 'V-150', VendorName: 'Closed Vendor', VendorCategory: 'Services',
+          Entity: 'DEMO-ENTITY-05', Value: 42, ActionType: 'Investigate', APOwner: 'Owner A',
+          WorkingNotes: 'Closed', DateResolved: '2026-07-18', DocDate: '2026-07-16',
+          InvRef: 'INV-150', EscalationDate: '2026-07-18',
+          DaysToResolve: 2,
+        },
+      ]);
+      const smoke = { countCalls: 0, queries: [], exports: 0 };
+      const service = {
+        ...baseService,
+        query(request) { smoke.queries.push(structuredClone(request)); return baseService.query(request); },
+        counts() { smoke.countCalls += 1; return baseService.counts(); },
+        exportAll(request) { smoke.exports += 1; return baseService.exportAll(request); },
+      };
+      const governedValues = {
+        Status: ['Action Required', 'In Progress', 'Closed', 'Duplicate'], Priority: ['Critical', 'High', 'Medium', 'Low'],
+        ActionType: ['Investigate'], APOwner: ['Owner A', 'Owner B'], Entity: ['DEMO-ENTITY-05', 'DEMO-ENTITY-02'],
+      };
+      window.__SMOKE__ = smoke;
+      window.__SMOKE_SERVICE__ = service;
+      renderApp(document.querySelector('#app-root'), {
+        config: { mode: 'mock', pageSize: 20, governedValues, filterOptions: governedValues },
+        service,
+      });
+    </script>
+  </body>
+</html>

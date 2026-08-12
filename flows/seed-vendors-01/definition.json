@@ -1,0 +1,225 @@
+{
+  "name": "00000000-0000-4000-8000-000000005006",
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dryRun": {
+                  "type": "boolean",
+                  "default": true
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_dry_run": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "dryRun",
+                "type": "boolean",
+                "value": "@coalesce(triggerBody()?['dryRun'], true)"
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Initialize_seed_payload": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "seedPayload",
+                "type": "object",
+                "value": {
+                  "schemaVersion": "1.0.0",
+                  "rowCount": 3,
+                  "fields": [
+                    "Vendor",
+                    "VendorName",
+                    "VendorCategory",
+                    "VendorLookupKey"
+                  ],
+                  "sha256": "57124f8eeedcf9a0fbc0ce0e668415bf1bb39771a6a1fb71f0728b19a8604415",
+                  "records": [
+                    [
+                      "100001",
+                      "Fixture Vendor One",
+                      "Services",
+                      "100001"
+                    ],
+                    [
+                      "100002",
+                      "Fixture Vendor Two",
+                      "Goods",
+                      "100002"
+                    ],
+                    [
+                      "100003",
+                      "Fixture Vendor Three",
+                      "Utilities",
+                      "100003"
+                    ]
+                  ]
+                }
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_dry_run": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Filter_embedded_records_with_lookup_key": {
+          "type": "Query",
+          "inputs": {
+            "from": "@variables('seedPayload')?['records']",
+            "where": "@not(empty(item()?[3]))"
+          },
+          "runAfter": {
+            "Initialize_seed_payload": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_to_each_embedded_seed_record": {
+          "type": "Foreach",
+          "foreach": "@body('Filter_embedded_records_with_lookup_key')",
+          "actions": {
+            "Find_existing_unique_key": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://example.invalid/sites/DemoPortal",
+                  "parameters/method": "GET",
+                  "parameters/uri": "@concat('_api/web/lists/getbytitle(''Demo Vendor Reference'')/items?$select=Id,Vendor_x0020_Lookup_x0020_Key&$filter=Vendor_x0020_Lookup_x0020_Key%20eq%20''', encodeUriComponent(replace(string(items('Apply_to_each_embedded_seed_record')?[3]),'''','''''')), '''')",
+                  "parameters/headers": {
+                    "Accept": "application/json;odata=nometadata",
+                    "Content-Type": "application/json;odata=nometadata"
+                  },
+                  "parameters/body": {}
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "connectionName": "fixture-connection",
+                  "operationId": "HttpRequest"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runAfter": {}
+            },
+            "If_not_dry_run_and_unique_key_is_new": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@variables('dryRun')",
+                      false
+                    ]
+                  },
+                  {
+                    "equals": [
+                      "@length(body('Find_existing_unique_key')?['value'])",
+                      0
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Create_target_list_item": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://example.invalid/sites/DemoPortal",
+                      "parameters/method": "POST",
+                      "parameters/uri": "_api/web/lists/getbytitle('Demo Vendor Reference')/items",
+                      "parameters/headers": {
+                        "Accept": "application/json;odata=nometadata",
+                        "Content-Type": "application/json;odata=nometadata"
+                      },
+                      "parameters/body": {
+                        "Vendor": "@items('Apply_to_each_embedded_seed_record')?[0]",
+                        "Vendor_x0020_Name": "@items('Apply_to_each_embedded_seed_record')?[1]",
+                        "Vendor_x0020_Category": "@items('Apply_to_each_embedded_seed_record')?[2]",
+                        "Vendor_x0020_Lookup_x0020_Key": "@items('Apply_to_each_embedded_seed_record')?[3]"
+                      }
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "connectionName": "fixture-connection",
+                      "operationId": "HttpRequest"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runAfter": {}
+                }
+              },
+              "else": {
+                "actions": {}
+              },
+              "runAfter": {
+                "Find_existing_unique_key": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 1
+            }
+          },
+          "runAfter": {
+            "Filter_embedded_records_with_lookup_key": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "metadata": {
+      "loaderType": "embedded-json",
+      "targetList": "Demo Vendor Reference",
+      "targetKeyField": "VendorLookupKey",
+      "chunkIndex": 1,
+      "chunkCount": 2,
+      "lookupKey": "trim + casefold"
+    },
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Escalation 01 Seed Loader Vendor Reference Chunk 1 IMPORT"
+  },
+  "id": "00000000-0000-4000-8000-000000005006",
+  "type": "Microsoft.Flow/flows"
+}

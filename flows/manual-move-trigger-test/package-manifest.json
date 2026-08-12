@@ -1,0 +1,54 @@
+{
+  "schema": "1.0",
+  "details": {
+    "displayName": "Demo Escalation - Manual Move Trigger Test",
+    "description": "Test-only flow to observe a new Fixture-West shared-mailbox message after a manual move.",
+    "createdTime": "2026-01-15T00:00:00.000Z",
+    "packageTelemetryId": "00000000-0000-4000-8000-000000001000",
+    "creator": "N/A",
+    "sourceEnvironment": ""
+  },
+  "resources": {
+    "00000000-0000-4000-8000-000000005008": {
+      "type": "Microsoft.Flow/flows",
+      "suggestedCreationType": "Update",
+      "creationType": "Existing, New, Update",
+      "details": {
+        "displayName": "Demo Escalation - Manual Move Trigger Test"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Root",
+      "dependsOn": [
+        "00000000-0000-4000-8000-000000001002",
+        "00000000-0000-4000-8000-000000001003"
+      ]
+    },
+    "00000000-0000-4000-8000-000000001002": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
+      "name": "shared_office365-1",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "Office 365 Outlook",
+        "iconUri": "https://example.invalid/assets/office-icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "00000000-0000-4000-8000-000000001003": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "fixture.sender@example.invalid",
+        "iconUri": "https://example.invalid/assets/office-icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "00000000-0000-4000-8000-000000001002"
+      ]
+    }
+  }
+}

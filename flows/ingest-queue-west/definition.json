@@ -1,0 +1,304 @@
+{
+  "name": "00000000-0000-4000-8000-000000005009",
+  "id": "/providers/Microsoft.Flow/flows/00000000-0000-4000-8000-000000005009",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Fixture queue west sweep",
+    "definition": {
+      "metadata": {
+        "workflowEntityId": null,
+        "processAdvisorMetadata": null,
+        "flowChargedByPaygo": null,
+        "flowclientsuspensionreason": "None",
+        "flowclientsuspensiontime": null,
+        "flowclientsuspensionreasondetails": null,
+        "creator": {
+          "id": "00000000-0000-4000-8000-000000001006",
+          "type": "User",
+          "tenantId": "FIXTURE-ID-001"
+        },
+        "provisioningMethod": "FromDefinition",
+        "failureAlertSubscription": true,
+        "clientLastModifiedTime": "2026-01-15T00:00:00Z",
+        "connectionKeySavedTimeKey": "2026-01-15T00:00:00Z",
+        "creationSource": null,
+        "modifiedSources": "Portal"
+      },
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "undefined",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Minute",
+            "interval": 10,
+            "startTime": "2026-01-15T00:00:00Z",
+            "timeZone": "GMT Standard Time"
+          },
+          "evaluatedRecurrence": {
+            "frequency": "Minute",
+            "interval": 10,
+            "startTime": "2026-01-15T00:00:00Z",
+            "timeZone": "GMT Standard Time"
+          },
+          "metadata": {
+            "operationMetadataId": "00000000-0000-4000-8000-000000001008"
+          },
+          "type": "Recurrence",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "runs": 1,
+              "maximumWaitingRuns": 10
+            }
+          }
+        }
+      },
+      "actions": {
+        "Within_UK_weekday_window": {
+          "type": "If",
+          "expression": "@and(greaterOrEquals(dayOfWeek(convertTimeZone(utcNow(),'UTC','GMT Standard Time')),1),lessOrEquals(dayOfWeek(convertTimeZone(utcNow(),'UTC','GMT Standard Time')),5),greaterOrEquals(int(formatDateTime(convertTimeZone(utcNow(),'UTC','GMT Standard Time'),'HHmm')),730),lessOrEquals(int(formatDateTime(convertTimeZone(utcNow(),'UTC','GMT Standard Time'),'HHmm')),1630))",
+          "actions": {
+            "Get_emails_(V3)": {
+              "runAfter": {},
+              "metadata": {
+                "Id::FIXTURE-RESOURCE-004": "Fixture queue operator",
+                "operationMetadataId": "00000000-0000-4000-8000-000000001009",
+                "Id::FIXTURE-RESOURCE-005": "Inbox",
+                "Id::FIXTURE-RESOURCE-006": "Fixture-West"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "importance": "Any",
+                  "fetchOnlyWithAttachment": false,
+                  "folderPath": "Id::FIXTURE-RESOURCE-006",
+                  "fetchOnlyUnread": false,
+                  "mailboxAddress": "fixture.sender@example.invalid",
+                  "includeAttachments": false,
+                  "top": 50
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "connectionName": "fixture-connection",
+                  "operationId": "GetEmailsV3"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Apply_to_each": {
+              "foreach": "@outputs('Get_emails_(V3)')?['body/value']",
+              "actions": {
+                "Compose_UniqueKey": {
+                  "metadata": {
+                    "operationMetadataId": "00000000-0000-4000-8000-000000001010"
+                  },
+                  "type": "Compose",
+                  "inputs": "@toLower(trim(coalesce(items('Apply_to_each')?['internetMessageId'], '')))\r\n\r\n"
+                },
+                "List_rows_present_in_a_table": {
+                  "runAfter": {
+                    "Delay": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "FIXTURE-FILE-INPUT-001": "/fixtures/queue-input-placeholder",
+                    "tableId": "{00000000-0000-4000-8000-000000001011}",
+                    "operationMetadataId": "00000000-0000-4000-8000-000000001012",
+                    "FIXTURE-FILE-QUEUE-001": "/fixtures/queue-input-placeholder",
+                    "FIXTURE-FILE-QUEUE-002": "/fixtures/queue-input-placeholder"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "source": "sites/example.invalid,00000000-0000-4000-8000-000000000901,00000000-0000-4000-8000-000000000902",
+                      "drive": "b!FIXTURE-DRIVE-002",
+                      "file": "FIXTURE-FILE-QUEUE-002",
+                      "table": "{00000000-0000-4000-8000-000000001011}"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+                      "connectionName": "fixture-connection",
+                      "operationId": "GetItems"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runtimeConfiguration": {
+                    "paginationPolicy": {
+                      "minimumItemCount": 5000
+                    }
+                  }
+                },
+                "Condition": {
+                  "actions": {
+                    "Add_a_row_into_a_table": {
+                      "metadata": {
+                        "FIXTURE-FILE-INPUT-001": "/fixtures/queue-input-placeholder",
+                        "tableId": "{00000000-0000-4000-8000-000000001011}",
+                        "operationMetadataId": "00000000-0000-4000-8000-000000001015",
+                        "FIXTURE-FILE-QUEUE-001": "/fixtures/queue-input-placeholder",
+                        "FIXTURE-FILE-QUEUE-002": "/fixtures/queue-input-placeholder"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "parameters": {
+                          "source": "sites/example.invalid,00000000-0000-4000-8000-000000000901,00000000-0000-4000-8000-000000000902",
+                          "drive": "b!FIXTURE-DRIVE-002",
+                          "file": "FIXTURE-FILE-QUEUE-002",
+                          "table": "{00000000-0000-4000-8000-000000001011}",
+                          "item/Mailbox": "Fixture-West",
+                          "item/From ": "@items('Apply_to_each')?['from']",
+                          "item/Reference": "@items('Apply_to_each')?['subject']",
+                          "item/Doc Date ": "-",
+                          "item/Inv ref": "-",
+                          "item/Action_Type": "-",
+                          "item/Status": "Action Required",
+                          "item/Received_Date": "@formatDateTime(items('Apply_to_each')?['receivedDateTime'],'dd/MM/yyyy')",
+                          "item/Internet_Message_ID": "@items('Apply_to_each')?['internetMessageId']",
+                          "item/UniqueKey": "@outputs('Compose_UniqueKey')",
+                          "item/S": "."
+                        },
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+                          "connectionName": "fixture-connection",
+                          "operationId": "AddRowV2"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Filter_array": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {}
+                  },
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@length(body('Filter_array'))\r\n",
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "00000000-0000-4000-8000-000000001016"
+                  },
+                  "type": "If"
+                },
+                "Condition_1": {
+                  "actions": {},
+                  "runAfter": {
+                    "Compose_UniqueKey": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {}
+                  },
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@empty(outputs('Compose_UniqueKey'))\r\n",
+                          true
+                        ]
+                      }
+                    ]
+                  },
+                  "type": "If"
+                },
+                "Delay": {
+                  "runAfter": {
+                    "Condition_1": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Wait",
+                  "inputs": {
+                    "interval": {
+                      "count": 5,
+                      "unit": "Second"
+                    }
+                  }
+                },
+                "Filter_array": {
+                  "runAfter": {
+                    "List_rows_present_in_a_table": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Query",
+                  "inputs": {
+                    "from": "@outputs('List_rows_present_in_a_table')?['body/value']",
+                    "where": "@equals(item()?['UniqueKey'],outputs('Compose_UniqueKey'))"
+                  }
+                }
+              },
+              "runAfter": {
+                "Get_emails_(V3)": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "00000000-0000-4000-8000-000000001017"
+              },
+              "type": "Foreach",
+              "runtimeConfiguration": {
+                "concurrency": {
+                  "repetitions": 1
+                }
+              }
+            }
+          },
+          "else": {
+            "actions": {
+              "Terminate_outside_UK_window": {
+                "type": "Terminate",
+                "inputs": {
+                  "runStatus": "Succeeded"
+                }
+              }
+            }
+          },
+          "runAfter": {}
+        }
+      },
+      "description": ""
+    },
+    "connectionReferences": {
+      "shared_office365-1": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
+        "tier": "NotSpecified",
+        "apiName": "office365",
+        "isProcessSimpleApiReferenceConversionAlreadyDone": false
+      },
+      "shared_excelonlinebusiness-1": {
+        "connectionName": "fixture-connection",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+        "tier": "NotSpecified",
+        "apiName": "excelonlinebusiness",
+        "isProcessSimpleApiReferenceConversionAlreadyDone": false
+      }
+    },
+    "flowFailureAlertSubscribed": false,
+    "isManaged": false
+  }
+}
