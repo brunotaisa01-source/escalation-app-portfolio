@@ -6,6 +6,10 @@ All data in this pack is deterministic and fictional. The flow packages are rebi
 
 For the portfolio overview, contribution scope and AI-assisted engineering context, see [PORTFOLIO_CONTEXT.md](PORTFOLIO_CONTEXT.md).
 
+For the visual architecture and validation gates, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+For the map across all seven portfolio packs, see [docs/PORTFOLIO_MAP.md](docs/PORTFOLIO_MAP.md).
+
 ## Start here
 
 1. Read [docs/README.md](docs/README.md).
