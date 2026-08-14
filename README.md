@@ -10,6 +10,17 @@ For the visual architecture and validation gates, see [docs/ARCHITECTURE.md](doc
 
 For the map across all seven portfolio packs, see [docs/PORTFOLIO_MAP.md](docs/PORTFOLIO_MAP.md).
 
+## What this project delivers
+
+- A generic escalation workbench with filters, paging, KPI views, editing, export and handoff behavior.
+- Twelve complete automation definitions in readable JSON and sanitized ZIP packages.
+- A deterministic local connector, ETL path, query layer and synthetic fixtures for repeatable demonstrations.
+- Frontend, flow, security, package-parity and local end-to-end validation contracts.
+
+## Problem it solves
+
+It turns fragmented escalation queues into a structured workflow. Teams can capture ownership, status, priority and resolution activity in one place, while automation and dashboard outputs make aging, duplicates, workload and handoff actions easier to manage.
+
 ## Start here
 
 1. Read [docs/README.md](docs/README.md).

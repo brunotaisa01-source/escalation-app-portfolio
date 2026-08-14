@@ -18,15 +18,15 @@ flowchart TB
 
 ## The seven packs
 
-| Repository | Main capability | Local contract |
-| --- | --- | --- |
-| `escalation-app-portfolio` | Flow-driven escalation workbench | 12 definitions -> local state -> ETL/query -> dashboard/export |
-| `payment-tracker-automation-portfolio` | Payment workflow and durable notification outbox | 5 provisioning units + 67 packages -> ETL/SQLite -> frontend/outbox |
-| `banking-dashboard-portfolio` | Banking operations reporting | Fixtures -> normalization -> SQLite/query -> browser dashboard |
-| `ledger-dashboard-portfolio` | Ledger and exception reporting | Validated staging -> transactional SQLite handoff -> typed browser layer |
-| `project-dashboard-portfolio` | Project and process-improvement reporting | Workbook -> 17-column validation -> generated dashboard |
-| `invoice-process-dashboard-portfolio` | Invoice process monitoring | Invoice fixture -> ETL/SQLite -> overview/details/trends/export |
-| `payment-dashboard-portfolio` | Payment operations reporting | Vendor/payment feeds -> SQLite -> filters/trends/supplier/block views |
+| Repository | What it delivers | Problem it solves | Local contract |
+| --- | --- | --- | --- |
+| `escalation-app-portfolio` | Escalation workbench, 12 automation definitions, ETL/query and export | Structured ownership, status, aging, duplicate and handoff management | 12 definitions -> local state -> ETL/query -> dashboard/export |
+| `payment-tracker-automation-portfolio` | Payment workflow, 5 provisioning units, 67 packages and durable outbox | Reliable payment state, approval and notification processing with recovery | 5 units + 67 packages -> ETL/SQLite -> frontend/outbox |
+| `banking-dashboard-portfolio` | Banking ETL, SQL/SQLite handoffs and operations dashboard | Repeatable reporting from workbook data with earlier quality checks | Fixtures -> normalization -> SQLite/query -> browser dashboard |
+| `ledger-dashboard-portfolio` | Ledger/exception UI, fail-closed staging and 5 SQLite handoffs | Safe exception investigation without partial database promotion | Validated staging -> transactional SQLite -> typed browser layer |
+| `project-dashboard-portfolio` | 17-column workbook pipeline, warnings, automation and dashboard | Consistent project, owner, priority and progress tracking | Workbook -> validation -> generated dashboard |
+| `invoice-process-dashboard-portfolio` | Invoice ETL, SQLite, SLA flows, trends and export | Visibility into invoice flow, ownership, aging and bottlenecks | Invoice fixture -> ETL/SQLite -> dashboard/export |
+| `payment-dashboard-portfolio` | Vendor/payment ETL, SQLite, operational views and CSV export | Investigation of blocked payments, suppliers and payment trends | Feeds -> SQLite -> filters/trends/supplier/block views |
 
 ## What the global tests mean
 
