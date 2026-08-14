@@ -12,14 +12,16 @@ For the map across all seven portfolio packs, see [docs/PORTFOLIO_MAP.md](docs/P
 
 ## What this project delivers
 
-- A generic escalation workbench with filters, paging, KPI views, editing, export and handoff behavior.
-- Twelve complete automation definitions in readable JSON and sanitized ZIP packages.
-- A deterministic local connector, ETL path, query layer and synthetic fixtures for repeatable demonstrations.
-- Frontend, flow, security, package-parity and local end-to-end validation contracts.
+This is an end-to-end escalation operations product, not only a dashboard. It combines a browser workbench, service and query contracts, a deterministic local data boundary, ETL behavior, automation packages and operator handoff outputs.
+
+- A frontend workbench with server-style filtering, paging, KPI coordination, editing, duplicate handling, CSV export and handoff behavior.
+- Twelve complete automation definitions in readable JSON and sanitized ZIP packages, including triggers, branches, expressions, retry/error paths and `runAfter` behavior.
+- A local fake connector that links evaluated flow effects to shared list state, ETL rows, queries, dashboard counts and export results.
+- Contract, flow execution, package-parity, security, lint, typecheck, build, browser smoke and local end-to-end validation surfaces.
 
 ## Problem it solves
 
-It turns fragmented escalation queues into a structured workflow. Teams can capture ownership, status, priority and resolution activity in one place, while automation and dashboard outputs make aging, duplicates, workload and handoff actions easier to manage.
+It addresses the gap between incoming escalation queues and accountable resolution. The product standardizes ingestion, ownership, status transitions, priority, duplicate treatment, aging, vendor/context lookup, operator updates and auditable handoff outputs instead of leaving the process across disconnected queues and manual trackers.
 
 ## Start here
 

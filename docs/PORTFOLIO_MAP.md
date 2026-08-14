@@ -20,13 +20,13 @@ flowchart TB
 
 | Repository | What it delivers | Problem it solves | Local contract |
 | --- | --- | --- | --- |
-| `escalation-app-portfolio` | Escalation workbench, 12 automation definitions, ETL/query and export | Structured ownership, status, aging, duplicate and handoff management | 12 definitions -> local state -> ETL/query -> dashboard/export |
-| `payment-tracker-automation-portfolio` | Payment workflow, 5 provisioning units, 67 packages and durable outbox | Reliable payment state, approval and notification processing with recovery | 5 units + 67 packages -> ETL/SQLite -> frontend/outbox |
-| `banking-dashboard-portfolio` | Banking ETL, SQL/SQLite handoffs and operations dashboard | Repeatable reporting from workbook data with earlier quality checks | Fixtures -> normalization -> SQLite/query -> browser dashboard |
-| `ledger-dashboard-portfolio` | Ledger/exception UI, fail-closed staging and 5 SQLite handoffs | Safe exception investigation without partial database promotion | Validated staging -> transactional SQLite -> typed browser layer |
-| `project-dashboard-portfolio` | 17-column workbook pipeline, warnings, automation and dashboard | Consistent project, owner, priority and progress tracking | Workbook -> validation -> generated dashboard |
-| `invoice-process-dashboard-portfolio` | Invoice ETL, SQLite, SLA flows, trends and export | Visibility into invoice flow, ownership, aging and bottlenecks | Invoice fixture -> ETL/SQLite -> dashboard/export |
-| `payment-dashboard-portfolio` | Vendor/payment ETL, SQLite, operational views and CSV export | Investigation of blocked payments, suppliers and payment trends | Feeds -> SQLite -> filters/trends/supplier/block views |
+| `escalation-app-portfolio` | End-to-end workbench, service/query contracts, 12 automation definitions, ETL/KPIs and export | Moves escalation queues into accountable, auditable resolution workflows | 12 definitions -> shared local state -> ETL/query -> dashboard/export |
+| `payment-tracker-automation-portfolio` | Frontend, workbook ETL, 5 provisioning units, 67 packages, SharePoint-shaped contracts and durable outbox | Controls the payment lifecycle with reliable state, notification recovery and duplicate prevention | 5 units + 67 packages -> ETL/contracts -> SQLite/outbox/frontend |
+| `banking-dashboard-portfolio` | Banking data product with loaders, normalization, SQL, two SQLite handoffs, mappings and browser reporting | Replaces workbook consolidation with inspectable, repeatable operational reporting | Fixtures -> validation/normalization -> SQLite/query -> generated dashboard |
+| `ledger-dashboard-portfolio` | Ledger exception product with fail-closed staging, five SQLite handoffs, typed contracts and reports | Makes exceptions visible while preventing unsafe or partial data promotion | Validated inputs -> transactional staging -> SQLite/query -> typed UI |
+| `project-dashboard-portfolio` | 17-column portfolio contract, parser, warnings, automation order and generated browser data | Standardizes project portfolio reporting and catches malformed rows before presentation | Workbook -> inspection/validation -> transformation -> dashboard |
+| `invoice-process-dashboard-portfolio` | 23-column invoice contract, ETL, two SQLite handoffs, SLA/calendar flows, trends and export | Makes invoice aging, ownership, SLA workload and bottlenecks measurable | Invoice fixture -> ETL/promotion -> dashboard/trends -> export |
+| `payment-dashboard-portfolio` | Feed-to-browser analytics product with vendor enrichment, ETL, SQL/SQLite, operational views and export | Supports investigation of blocked payments, suppliers, trends and repeatable reporting | Vendor/payment feeds -> ETL/SQLite -> generated views -> CSV |
 
 ## What the global tests mean
 
